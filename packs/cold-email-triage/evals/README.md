@@ -24,5 +24,5 @@ Outputs per-label precision, recall, F1, and a confusion matrix. Costs ~$0.04 pe
 ## Notes on the corpus
 
 - All emails anonymised: names, company names, and domains replaced; phone numbers and links removed.
-- Distribution roughly mirrors a real founder inbox: 8% hot, 22% warm, 65% spam, 5% needs-human.
+- Distribution: 16% hot, 22% warm, 52% spam, 10% needs-human. Slightly heavier on the harder labels (hot, needs-human) than a typical inbox so the eval signal isn't drowned by easy spam.
 - Add your own cases freely — the eval picks up everything in the file.
