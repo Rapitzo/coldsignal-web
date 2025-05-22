@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Pack store — agent kits for people shipping with AI",
+  title: "Packforge — agent kits for people shipping with AI",
   description:
-    "Polished agent templates, prompt libraries, and skill packs you can buy once and ship today.",
+    "Polished Claude Skills, prompt libraries, and starter flows for the agent use cases that actually pay. Buy once, keep your margin.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
