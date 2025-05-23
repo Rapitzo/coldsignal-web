@@ -1,6 +1,15 @@
 import { PRODUCT } from "@/lib/product";
 
-export default function HomePage() {
+type SearchParams = { source?: string | string[] };
+
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams?: Promise<SearchParams>;
+}) {
+  const params = (await searchParams) ?? {};
+  const rawSource = Array.isArray(params.source) ? params.source[0] : params.source;
+  const source = rawSource ?? "";
   return (
     <main className="mx-auto max-w-4xl px-6 py-20">
       <header>
@@ -31,6 +40,7 @@ export default function HomePage() {
               className="rounded-lg border border-zinc-800 bg-zinc-950 p-6"
             >
               <input type="hidden" name="priceType" value={price.type} />
+              <input type="hidden" name="source" value={source} />
               <p className="text-sm uppercase tracking-wider text-zinc-500">{price.label}</p>
               <p className="mt-2 text-3xl font-semibold">{price.unit}</p>
               <button
