@@ -22,14 +22,16 @@ export async function POST(req: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
-    const packSlug = session.metadata?.packSlug;
+    // metadata.product is the canonical slug; metadata.priceType distinguishes monthly vs onetime.
+    // Fall back to legacy metadata.packSlug for any in-flight Stripe sessions from the old store.
+    const productSlug = session.metadata?.product ?? session.metadata?.packSlug;
     const email = session.customer_details?.email;
-    if (packSlug && email && session.amount_total != null) {
+    if (productSlug && email && session.amount_total != null) {
       await db
         .insert(purchases)
         .values({
           email,
-          packSlug,
+          packSlug: productSlug,
           stripeSessionId: session.id,
           amountGbpPence: session.amount_total,
         })

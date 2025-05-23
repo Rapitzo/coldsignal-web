@@ -1,0 +1,29 @@
+services:
+  triagepack:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: triagepack:0.1.0-dev
+    read_only: true
+    tmpfs:
+      - /tmp:size=100m
+    cap_drop: ["ALL"]
+    security_opt:
+      - no-new-privileges:true
+    user: "10001:10001"
+    ports:
+      - "8081:8081"
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
+      SLACK_CHANNEL_ID: ${SLACK_CHANNEL_ID}
+      LOKI_URL: ${LOKI_URL:-}
+      DATADOG_API_KEY: ${DATADOG_API_KEY:-}
+      DATADOG_APP_KEY: ${DATADOG_APP_KEY:-}
+      NOTION_TOKEN: ${NOTION_TOKEN:-}
+      RUNBOOK_DIR: ${RUNBOOK_DIR:-}
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+    # Egress allowlist enforced by an external proxy in production. Local-only sandbox here
+    # gets the same posture via Docker user-defined network + iptables sidecar (Day 6).
+    restart: unless-stopped

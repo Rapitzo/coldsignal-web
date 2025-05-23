@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
-import { spawn } from "node:child_process";
-import { resolve } from "node:path";
 import { stripe } from "@/lib/stripe";
-import { PACKS } from "@/lib/packs";
+import { PRODUCT } from "@/lib/product";
 
 export const runtime = "nodejs";
 
-// Re-verifies the Stripe session before streaming the pack zip.
-// v0: zips on demand from packs/<slug>/. Move to S3 + signed URLs once we have >1 sale/day.
+// Re-verifies the Stripe session before redirecting to the signed GitHub release.
+// The release URL is set via TRIAGEPACK_RELEASE_URL once the v1 binary is signed.
+// Until then we return a 503 with a polite explanation rather than a broken redirect.
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const sessionId = url.searchParams.get("session_id");
@@ -18,31 +17,16 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "payment not complete" }, { status: 402 });
   }
 
-  const slug = session.metadata?.packSlug;
-  const pack = PACKS.find((p) => p.slug === slug);
-  if (!pack || !slug) return NextResponse.json({ error: "pack not found" }, { status: 404 });
+  if (!PRODUCT.releaseUrl) {
+    return NextResponse.json(
+      {
+        status: "release_not_yet_signed",
+        message:
+          "The signed v1 release lands once the security checklist is signed off. We've recorded your purchase and will email the link the moment it ships.",
+      },
+      { status: 503 },
+    );
+  }
 
-  const packDir = resolve(process.cwd(), "packs", slug);
-
-  // Pipe a zip stream straight to the response. Uses system `zip` (Vercel runtime has it).
-  const zip = spawn("zip", ["-r", "-q", "-", "."], { cwd: packDir });
-
-  const stream = new ReadableStream({
-    start(controller) {
-      zip.stdout.on("data", (chunk) => controller.enqueue(chunk));
-      zip.stdout.on("end", () => controller.close());
-      zip.on("error", (err) => controller.error(err));
-    },
-    cancel() {
-      zip.kill();
-    },
-  });
-
-  return new Response(stream, {
-    headers: {
-      "content-type": "application/zip",
-      "content-disposition": `attachment; filename="${slug}.zip"`,
-      "cache-control": "no-store",
-    },
-  });
+  return NextResponse.redirect(PRODUCT.releaseUrl, { status: 303 });
 }

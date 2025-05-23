@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Packforge — agent kits for people shipping with AI",
+  title: "Incident Triage Agent — audited Claude agent for SRE on-call",
   description:
-    "Polished Claude Skills, prompt libraries, and starter flows for the agent use cases that actually pay. Buy once, keep your margin.",
+    "An audited Claude agent that triages PagerDuty alerts, pulls context via MCP, and posts a proposed RCA to Slack. Pinned MCP versions, signed releases, 30 eval scenarios in the box.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
