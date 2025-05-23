@@ -2,14 +2,19 @@
 
 from __future__ import annotations
 
+import logging
+import os
 from typing import Any
 
 from fastapi import BackgroundTasks, FastAPI, Header, HTTPException, Request
 
 from .alert import Alert, from_pagerduty
 from .observability import setup_otel, tracer
+from .reasoning import triage
+from . import slack
 
 setup_otel()
+log = logging.getLogger("triagepack.webhook")
 
 app = FastAPI(title="triagepack", version="0.1.0-dev")
 
@@ -31,7 +36,7 @@ async def pagerduty_incident(
     payload: dict[str, Any] = await request.json()
     try:
         alert = from_pagerduty(payload)
-    except Exception as exc:  # pragma: no cover — adapter is intentionally lenient
+    except Exception as exc:
         raise HTTPException(status_code=400, detail=f"could not parse PagerDuty payload: {exc}")
 
     with tracer.start_as_current_span("triage.enqueue") as span:
@@ -44,11 +49,31 @@ async def pagerduty_incident(
 
 
 async def _run_triage(alert: Alert) -> None:
-    """Background entry point.
+    """Pipe a single alert through the reasoning loop and post results to Slack."""
+    slack_enabled = bool(os.environ.get("SLACK_BOT_TOKEN") and os.environ.get("SLACK_CHANNEL_ID"))
 
-    Day 3: wires reasoning.triage(alert) → slack.post(...).
-    For now the scaffold just records that we received the alert.
-    """
-    # TODO Day 3: from .reasoning import triage; result = await triage(alert)
-    # TODO Day 3: from .slack import post_initial, update_thread
-    return None
+    thread_ts: str | None = None
+    if slack_enabled:
+        try:
+            thread_ts = await slack.post_initial(alert)
+        except Exception:
+            log.exception("slack.post_initial failed; continuing without thread")
+
+    try:
+        result = await triage(alert)
+    except Exception:
+        log.exception("triage() raised; alert %s left untriaged", alert.external_id)
+        return
+
+    if slack_enabled and thread_ts:
+        try:
+            await slack.update_thread(thread_ts, alert, result)
+        except Exception:
+            log.exception("slack.update_thread failed for alert %s", alert.external_id)
+    else:
+        log.info(
+            "triaged %s confidence=%.2f needs_human=%s",
+            alert.external_id,
+            result.confidence,
+            result.needs_human,
+        )
