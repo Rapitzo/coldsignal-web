@@ -61,6 +61,19 @@ The sender skill reads these from `process.env`. If `RESEND_API_KEY` is
 missing, the skill exits with a board-action-required comment instead of
 attempting a send.
 
+## Self-test (proving the wiring before any real outreach)
+
+After `RESEND_API_KEY` and `RESEND_FROM_DOMAIN` are in `.env.local`:
+
+```
+pnpm tsx scripts/outreach-selftest.ts you@board.address
+```
+
+Bypasses the approval flow on purpose — this exists to prove the rail itself
+works (key valid, domain verified, from-address resolves) before any real
+outreach goes through. Prints the Resend message id on success; check the
+Resend dashboard to confirm "delivered".
+
 ## What's NOT in this folder
 
 - LinkedIn / HN / IH messages — no API, sent manually. Drafts live as issue
