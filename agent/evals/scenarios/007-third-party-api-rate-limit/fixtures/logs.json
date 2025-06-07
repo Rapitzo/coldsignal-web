@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-28T18:54:11Z","level":"warn","message":"stripe.com 429 rate_limit_exceeded retry-after: 6s","host":"webhooks-out-1"},
+  {"ts":"2026-04-28T18:54:18Z","level":"warn","message":"stripe.com 429 rate_limit_exceeded retry-after: 8s","host":"webhooks-out-1"},
+  {"ts":"2026-04-28T18:54:25Z","level":"error","message":"webhooks-out queue depth 8421 (was 120 at 18:30)","host":"webhooks-out-1"}
+]

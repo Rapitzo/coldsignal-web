@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-28T07:20:11Z","level":"warn","message":"/var/log/ingest is 26GB (was 1.2GB on 2026-04-26)","host":"ingest-worker-2"},
+  {"ts":"2026-04-28T07:20:30Z","level":"error","message":"logrotate stderr: error opening /var/log/ingest/app.log.7.gz: No space left on device","host":"ingest-worker-2"},
+  {"ts":"2026-04-28T07:20:55Z","level":"error","message":"failed to write checkpoint: ENOSPC","host":"ingest-worker-2"}
+]

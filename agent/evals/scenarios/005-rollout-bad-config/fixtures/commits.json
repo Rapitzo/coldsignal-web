@@ -1,0 +1,3 @@
+[
+  {"sha":"77aa11bb22","author":"j.lee","committed_at":"2026-04-28T10:55:00Z","message":"search-api: switch ELASTIC_REQUEST_TIMEOUT_MS default 30000 -> 300","url":"https://github.example/acme/search-api/commit/77aa11bb"}
+]

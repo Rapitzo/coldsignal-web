@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-28T20:41:31Z","level":"warn","message":"dns lookup internal-svc.acme.example: NXDOMAIN (resolver: ns1)","host":"app-7"},
+  {"ts":"2026-04-28T20:41:32Z","level":"info","message":"dns lookup internal-svc.acme.example: 10.4.7.22 (resolver: ns2)","host":"app-7"},
+  {"ts":"2026-04-28T20:41:38Z","level":"warn","message":"upstream connection refused after 2 NXDOMAIN retries","host":"app-7"}
+]

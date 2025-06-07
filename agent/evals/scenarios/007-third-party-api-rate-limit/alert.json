@@ -1,0 +1,1 @@
+{"event":{"id":"evt_007","event_type":"incident.triggered","occurred_at":"2026-04-28T18:55:00Z","data":{"type":"incident","id":"PINC-007","title":"webhooks-out 429 burst from stripe.com","description":"webhooks-out is being rate-limited by Stripe; queue building up.","severity":"error","status":"triggered","service":{"id":"PSVC-WEBHOOKS","summary":"webhooks-out"}}}}

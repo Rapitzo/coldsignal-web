@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-28T16:41:21Z","level":"error","message":"timeout acquiring connection from pool (waiters=42, idle=0, in_use=20)","host":"orders-api-3"},
+  {"ts":"2026-04-28T16:41:42Z","level":"error","message":"sqlalchemy.exc.TimeoutError: QueuePool limit of size 20 overflow 10 reached","host":"orders-api-3"},
+  {"ts":"2026-04-28T16:41:50Z","level":"warn","message":"slow request /v1/orders/export 14.2s status=500","host":"orders-api-3"}
+]

@@ -1,0 +1,3 @@
+[
+  {"sha":"deadbeef01","author":"infra-bot","committed_at":"2026-04-28T20:30:00Z","message":"infra/dns: add internal-svc.acme.example A 10.4.7.22 (only one of two A records)","url":"https://github.example/acme/infra/commit/deadbeef"}
+]

@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-28T11:04:30Z","level":"error","message":"elasticsearch query timeout after 300ms","host":"search-api-canary-1"},
+  {"ts":"2026-04-28T11:04:31Z","level":"error","message":"elasticsearch query timeout after 300ms","host":"search-api-canary-1"},
+  {"ts":"2026-04-28T11:04:35Z","level":"error","message":"500 internal server error: upstream timeout","host":"search-api-canary-1"}
+]

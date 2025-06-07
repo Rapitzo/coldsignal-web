@@ -1,0 +1,1 @@
+{"event":{"id":"evt_004","event_type":"incident.triggered","occurred_at":"2026-04-28T16:42:00Z","data":{"type":"incident","id":"PINC-004","title":"orders-api 500 burst, db_pool_wait > 2s","description":"orders-api returning 500s, p95 db pool wait climbing past SLO.","severity":"critical","status":"triggered","service":{"id":"PSVC-ORDERS","summary":"orders-api"}}}}

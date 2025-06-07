@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-28T00:00:42Z","level":"error","message":"x509: certificate has expired or is not yet valid: current time 2026-04-28T00:00:42Z is after 2026-04-27T23:59:59Z","host":"partner-api-1"},
+  {"ts":"2026-04-28T00:00:43Z","level":"error","message":"tls handshake failed: partner.example.com:443","host":"partner-api-1"},
+  {"ts":"2026-04-28T00:00:50Z","level":"error","message":"upstream partner returned 0 successful responses in last 60s","host":"partner-api-1"}
+]

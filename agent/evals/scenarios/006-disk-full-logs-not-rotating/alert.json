@@ -1,0 +1,1 @@
+{"event":{"id":"evt_006","event_type":"incident.triggered","occurred_at":"2026-04-28T07:21:00Z","data":{"type":"incident","id":"PINC-006","title":"ingest-worker disk > 95% on three hosts","description":"Disk pressure climbing on ingest-worker fleet. Writes starting to fail.","severity":"error","status":"triggered","service":{"id":"PSVC-INGEST","summary":"ingest-worker"}}}}

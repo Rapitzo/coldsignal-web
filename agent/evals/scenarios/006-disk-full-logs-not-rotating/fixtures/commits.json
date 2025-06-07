@@ -1,0 +1,3 @@
+[
+  {"sha":"22cc88dd99","author":"r.lopez","committed_at":"2026-04-26T18:14:00Z","message":"ingest-worker: bump verbose request log to INFO (was DEBUG)","url":"https://github.example/acme/ingest-worker/commit/22cc88dd"}
+]

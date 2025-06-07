@@ -1,0 +1,1 @@
+{"event":{"id":"evt_008","event_type":"incident.triggered","occurred_at":"2026-04-28T13:18:00Z","data":{"type":"incident","id":"PINC-008","title":"checkout-api conversion drop after flag flip","description":"checkout-api conversion fell 32% in last 15min. No service errors.","severity":"warning","status":"triggered","service":{"id":"PSVC-CHECKOUT","summary":"checkout-api"}}}}

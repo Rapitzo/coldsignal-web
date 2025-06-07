@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-28T13:03:14Z","level":"info","message":"feature flag 'checkout_v2_apple_pay_default' targeting changed: 5% -> 100%","host":"flag-svc-1","actor":"laila@acme.example"},
+  {"ts":"2026-04-28T13:05:01Z","level":"info","message":"checkout-api: rendering apple_pay button as default payment method","host":"checkout-api-2"},
+  {"ts":"2026-04-28T13:17:00Z","level":"info","message":"checkout completion rate (15min rolling): 41.2% (was 60.8%)","host":"checkout-api-2"}
+]
