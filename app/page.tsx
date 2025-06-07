@@ -80,6 +80,20 @@ export default async function HomePage({
         </form>
       </section>
 
+      <section className="mt-16 rounded-lg border border-zinc-800 bg-zinc-950 p-6">
+        <h2 className="text-xl font-semibold">Already a buyer? Install in two minutes.</h2>
+        <p className="mt-2 text-sm text-zinc-400">
+          Drop the MCP server into Claude Desktop / Cline, or run the Docker image as a webhook
+          receiver. One licence covers both.
+        </p>
+        <a
+          href={`/install${source ? `?source=${encodeURIComponent(source)}` : ""}`}
+          className="mt-4 inline-block rounded-md border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-900"
+        >
+          Install instructions →
+        </a>
+      </section>
+
       <footer className="mt-24 border-t border-zinc-800 pt-6 text-sm text-zinc-500">
         Built for SRE teams who don't want another agent installed without an audit trail. Working name <code className="text-zinc-400">{PRODUCT.workingTitle}</code>.
       </footer>

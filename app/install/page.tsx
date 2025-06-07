@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import { PRODUCT } from "@/lib/product";
+
+export const metadata: Metadata = {
+  title: `Install ${PRODUCT.name} — MCP server + Docker webhook`,
+  description:
+    "Install triagepack as an MCP server (Claude Desktop, Cline) or as a self-hosted Docker webhook for PagerDuty / Datadog / Opsgenie. One licence, both delivery shapes.",
+  openGraph: {
+    title: `Install ${PRODUCT.name}`,
+    description:
+      "MCP server + Docker webhook install for triagepack. Audited, pinned MCP versions, signed releases.",
+    type: "article",
+  },
+};
 
 type SearchParams = { source?: string | string[] };
 
