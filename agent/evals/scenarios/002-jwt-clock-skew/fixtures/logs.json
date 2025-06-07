@@ -1,0 +1,6 @@
+[
+  {"ts": "2026-04-28T09:31:54Z", "level": "warn",  "message": "JWT validation failed: token used before nbf (clock skew?)", "host": "auth-gateway-eu-3", "pod": "eu"},
+  {"ts": "2026-04-28T09:31:55Z", "level": "warn",  "message": "JWT validation failed: token used before nbf (clock skew?)", "host": "auth-gateway-eu-3", "pod": "eu"},
+  {"ts": "2026-04-28T09:31:58Z", "level": "info",  "message": "ntpd: clock unsynchronised, last sync 47m ago", "host": "auth-gateway-eu-3"},
+  {"ts": "2026-04-28T09:32:02Z", "level": "error", "message": "401 unauthorized: nbf check failed", "host": "auth-gateway-eu-3"}
+]

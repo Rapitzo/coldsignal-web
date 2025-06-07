@@ -1,0 +1,6 @@
+{
+  "category": "auth",
+  "root_component": "auth-gateway",
+  "cause_family": "clock skew",
+  "fix_keywords": ["ntp", "chrony", "timesync", "resync"]
+}

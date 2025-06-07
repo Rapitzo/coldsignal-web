@@ -1,0 +1,16 @@
+{
+  "event": {
+    "id": "evt_002",
+    "event_type": "incident.triggered",
+    "occurred_at": "2026-04-28T09:32:10Z",
+    "data": {
+      "type": "incident",
+      "id": "PINC-002",
+      "title": "auth-gateway 401 spike on EU pod",
+      "description": "Spike in 401 responses from auth-gateway in EU pod only. US/APAC pods nominal.",
+      "severity": "error",
+      "status": "triggered",
+      "service": { "id": "PSVC-AUTH", "summary": "auth-gateway" }
+    }
+  }
+}

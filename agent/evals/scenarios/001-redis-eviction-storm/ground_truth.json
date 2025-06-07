@@ -1,0 +1,6 @@
+{
+  "category": "infra",
+  "root_component": "redis",
+  "cause_family": "memory",
+  "fix_keywords": ["maxmemory", "revert", "eviction"]
+}

@@ -1,0 +1,7 @@
+{
+  "category": "app",
+  "root_component": "billing-worker",
+  "cause_family": "needs human",
+  "fix_keywords": ["needs human", "needs-human", "more signal", "additional"],
+  "expect_needs_human": true
+}

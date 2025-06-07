@@ -1,0 +1,9 @@
+[
+  {
+    "sha": "ff44ee99aa11",
+    "author": "infra-bot",
+    "committed_at": "2026-04-28T09:00:01Z",
+    "message": "auth-gateway: bump base image to debian-slim 12.6 (security)",
+    "url": "https://github.example/acme/auth-gateway/commit/ff44ee99"
+  }
+]

@@ -1,0 +1,4 @@
+[
+  {"ts": "2026-04-28T14:00:30Z", "level": "info", "message": "billing-worker: processed 142 messages in last 60s", "host": "billing-worker-1"},
+  {"ts": "2026-04-28T14:01:30Z", "level": "info", "message": "billing-worker: processed 138 messages in last 60s", "host": "billing-worker-1"}
+]

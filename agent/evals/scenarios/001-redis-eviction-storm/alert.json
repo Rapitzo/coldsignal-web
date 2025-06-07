@@ -1,0 +1,16 @@
+{
+  "event": {
+    "id": "evt_001",
+    "event_type": "incident.triggered",
+    "occurred_at": "2026-04-28T03:14:00Z",
+    "data": {
+      "type": "incident",
+      "id": "PINC-001",
+      "title": "session-api error rate > 8% for 5m",
+      "description": "Error budget burning. /v1/sessions returning 503 from one of three replicas.",
+      "severity": "critical",
+      "status": "triggered",
+      "service": { "id": "PSVC-SESSION", "summary": "session-api" }
+    }
+  }
+}

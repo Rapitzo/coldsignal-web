@@ -1,0 +1,16 @@
+[
+  {
+    "sha": "a1b2c3d4e5f6",
+    "author": "p.dean",
+    "committed_at": "2026-04-28T02:48:11Z",
+    "message": "session-api: cache user permissions (TTL 24h) to cut auth-svc load",
+    "url": "https://github.example/acme/session-api/commit/a1b2c3d4"
+  },
+  {
+    "sha": "0099aabb1122",
+    "author": "p.dean",
+    "committed_at": "2026-04-28T02:50:43Z",
+    "message": "session-api: also cache org membership lookup (TTL 24h)",
+    "url": "https://github.example/acme/session-api/commit/0099aabb"
+  }
+]

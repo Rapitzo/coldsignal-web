@@ -1,0 +1,16 @@
+{
+  "event": {
+    "id": "evt_003",
+    "event_type": "incident.triggered",
+    "occurred_at": "2026-04-28T14:02:00Z",
+    "data": {
+      "type": "incident",
+      "id": "PINC-003",
+      "title": "billing-worker queue depth > 5000",
+      "description": "billing-worker SQS queue depth climbing for 10 minutes. No accompanying error log signature.",
+      "severity": "warning",
+      "status": "triggered",
+      "service": { "id": "PSVC-BILLING", "summary": "billing-worker" }
+    }
+  }
+}
