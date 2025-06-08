@@ -40,11 +40,11 @@ Idempotency: the sender refuses to send the same `approvalId` twice.
 
 | Step | Owner | Status |
 |---|---|---|
-| Pick sending domain | Board | Recommend `coldsignal.dev` |
-| Create Resend account at [resend.com](https://resend.com) | Board | Pending |
-| Add domain in Resend dashboard | Board | Pending |
-| Drop DNS records at registrar (TXT × 3) | Board | Pending — Resend generates them after domain is added |
-| Paste API key into `.env.local` as `RESEND_API_KEY` | Board → CTO | Pending |
+| Pick sending domain | Board | Done — `contact.coldsignal.dev` (subdomain) |
+| Create Resend account at [resend.com](https://resend.com) | Board | Done |
+| Add domain in Resend dashboard | Board | Done |
+| Drop DNS records at registrar (TXT × 3) | Board | Done |
+| Paste API key into `.env.local` as `RESEND_API_KEY` | Board → CTO | Pending — file not yet on disk |
 
 Resend free tier covers 100/day, 3 000/mo. Plenty for cycle 1.
 
@@ -53,9 +53,15 @@ Resend free tier covers 100/day, 3 000/mo. Plenty for cycle 1.
 ```
 .env.local        (gitignored — never committed)
 RESEND_API_KEY=re_xxx_yyy
-RESEND_FROM_DOMAIN=coldsignal.dev
-RESEND_REPLY_TO=hello@coldsignal.dev   # whatever inbox the board reads
+RESEND_FROM_DOMAIN=contact.coldsignal.dev
+RESEND_FROM_NAME=Coldsignal
+RESEND_REPLY_TO=hello@contact.coldsignal.dev   # whatever inbox the board reads
 ```
+
+The verified sending domain is the **subdomain** `contact.coldsignal.dev` —
+that's what's set up in Resend with DNS records live. Sender addresses
+resolve to `hello@contact.coldsignal.dev`. The apex (`coldsignal.dev`) is
+not a sending domain.
 
 The sender skill reads these from `process.env`. If `RESEND_API_KEY` is
 missing, the skill exits with a board-action-required comment instead of
