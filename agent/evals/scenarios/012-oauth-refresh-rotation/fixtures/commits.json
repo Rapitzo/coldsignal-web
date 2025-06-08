@@ -1,0 +1,3 @@
+[
+  {"sha":"11aa22bb33","author":"smiller","committed_at":"2026-04-29T13:48:00Z","message":"auth: enable refresh token rotation + reuse detection","url":"https://github.example/acme/auth-gateway/commit/11aa22bb33"}
+]

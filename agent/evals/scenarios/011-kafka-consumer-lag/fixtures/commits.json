@@ -1,0 +1,4 @@
+[
+  {"sha":"a1b2c3d4e5","author":"jdoe","committed_at":"2026-04-29T08:55:00Z","message":"orders: enrich each event with full customer profile (extra DB call per message)","url":"https://github.example/acme/orders/commit/a1b2c3d4e5"},
+  {"sha":"f6g7h8i9j0","author":"jdoe","committed_at":"2026-04-29T08:40:00Z","message":"orders: bump max.poll.records 500 -> 50 to debug ordering","url":"https://github.example/acme/orders/commit/f6g7h8i9j0"}
+]

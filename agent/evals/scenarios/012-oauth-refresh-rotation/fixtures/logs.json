@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-29T14:01:11Z","level":"warn","message":"oauth.refresh: invalid_grant for client_id=ios-app sub=u_8821 reason=refresh_reused","host":"auth-1"},
+  {"ts":"2026-04-29T14:01:42Z","level":"warn","message":"oauth.refresh: invalid_grant for client_id=android-app sub=u_4410 reason=refresh_reused","host":"auth-2"},
+  {"ts":"2026-04-29T14:02:09Z","level":"info","message":"refresh rotation enabled: pre-rotation grants stored in old clients are now rejected","host":"auth-1"}
+]

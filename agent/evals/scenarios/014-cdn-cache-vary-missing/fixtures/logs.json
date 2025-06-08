@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-04-29T20:16:11Z","level":"warn","message":"edge cache HIT for /dashboard tenant-mismatch: served body for tenant=acme to request authed as tenant=initech","host":"cdn-edge-iad"},
+  {"ts":"2026-04-29T20:16:32Z","level":"info","message":"response cache key /dashboard ignored cookies; Vary header absent","host":"cdn-edge-iad"}
+]

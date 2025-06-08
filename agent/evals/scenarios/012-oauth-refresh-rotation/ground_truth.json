@@ -1,0 +1,1 @@
+{"category":"auth","root_component":"oauth","cause_family":"refresh-token","fix_keywords":["refresh token rotation","invalid_grant","revert","disable rotation","reuse detection"]}

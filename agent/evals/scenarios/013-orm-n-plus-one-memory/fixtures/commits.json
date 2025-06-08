@@ -1,0 +1,3 @@
+[
+  {"sha":"99887766aa","author":"akhan","committed_at":"2026-04-29T17:05:00Z","message":"catalog: drop select_related on Listing.seller while debugging serializer","url":"https://github.example/acme/catalog-api/commit/99887766aa"}
+]

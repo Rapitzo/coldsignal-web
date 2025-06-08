@@ -1,0 +1,1 @@
+{"category":"app","root_component":"cron","cause_family":"overlap","fix_keywords":["concurrencyPolicy: Forbid","mutex","advisory lock","skip if running","singleton"]}

@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-29T22:00:00Z","level":"info","message":"billing-cron started; previous run still active (started 2026-04-29T21:00:00Z)","host":"billing-cron-7ab"},
+  {"ts":"2026-04-29T22:01:14Z","level":"warn","message":"postgres: row exclusive lock held 3614s on invoices.id=4421 by pid=2233","host":"db-primary"},
+  {"ts":"2026-04-29T22:02:00Z","level":"warn","message":"3 billing-cron pods active concurrently; concurrencyPolicy=Allow","host":"billing-cron-9cd"}
+]

@@ -1,0 +1,1 @@
+{"category":"data","root_component":"kafka","cause_family":"consumer","fix_keywords":["partition","rebalance","max.poll","scale consumers","slow handler"]}

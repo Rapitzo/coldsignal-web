@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-29T17:54:02Z","level":"warn","message":"catalog.search served 240 results in 4810ms (issued 241 SQL queries)","host":"catalog-api-3"},
+  {"ts":"2026-04-29T17:54:18Z","level":"error","message":"OOMKilled: container catalog-api-3 RSS=2034MB limit=2048MB","host":"catalog-api-3"},
+  {"ts":"2026-04-29T17:54:31Z","level":"warn","message":"slow query: SELECT seller.* FROM seller WHERE id = $1 (repeated 240x in request /v1/catalog/search)","host":"catalog-api-1"}
+]

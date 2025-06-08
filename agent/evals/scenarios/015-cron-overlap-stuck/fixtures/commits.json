@@ -1,0 +1,4 @@
+[
+  {"sha":"e1f2a3b4c5","author":"jchen","committed_at":"2026-04-29T15:00:00Z","message":"billing: add per-line tax recompute (extra round trip per invoice)","url":"https://github.example/acme/billing-cron/commit/e1f2a3b4c5"},
+  {"sha":"d6e7f8a9b0","author":"jchen","committed_at":"2026-04-28T11:00:00Z","message":"k8s: change CronJob concurrencyPolicy Forbid -> Allow during backfill","url":"https://github.example/acme/billing-cron/commit/d6e7f8a9b0"}
+]

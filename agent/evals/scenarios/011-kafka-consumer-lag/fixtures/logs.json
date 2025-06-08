@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-29T09:11:30Z","level":"warn","message":"consumer poll took 8.4s (max.poll.interval=10s) on topic orders.events partition 7","host":"orders-consumer-2"},
+  {"ts":"2026-04-29T09:11:45Z","level":"error","message":"customer-profile-db query timeout after 4500ms during enrichment","host":"orders-consumer-1"},
+  {"ts":"2026-04-29T09:11:58Z","level":"warn","message":"group orders-consumer lag=271203 partitions=12","host":"orders-consumer-3"}
+]

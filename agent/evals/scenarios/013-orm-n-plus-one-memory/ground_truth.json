@@ -1,0 +1,1 @@
+{"category":"app","root_component":"orm","cause_family":"n+1","fix_keywords":["select_related","eager load","N+1","revert","includes"]}

@@ -1,0 +1,3 @@
+[
+  {"sha":"cdcd99aa11","author":"perf-bot","committed_at":"2026-04-29T19:40:00Z","message":"web: enable CDN edge cache for /dashboard to reduce origin RPS (Cache-Control: public, max-age=300)","url":"https://github.example/acme/marketing-web/commit/cdcd99aa11"}
+]
