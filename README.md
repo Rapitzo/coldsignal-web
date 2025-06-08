@@ -2,7 +2,7 @@
 
 Swarm Cycle 1 / Experiment E1 deliverable per [LIN-4](/LIN/issues/LIN-4). 14-day ship: 2026-04-27 → 2026-05-11. Plan: [/LIN/issues/LIN-4#document-plan](/LIN/issues/LIN-4#document-plan).
 
-> **Pivot note.** This repo previously housed the packforge.dev pack-store thesis. That thesis was killed on 2026-04-27 by the CEO (saturated marketplace, AgentPacks already there). The repo was repurposed; the catalogue UI and `cold-email-triage` / `listing-generator` packs were removed. Other in-flight experiments (`app/mcp-audit/` for LIN-12, `app/e3-*` for LIN-13) live alongside this one.
+> **Pivot note.** This repo previously housed an MCP pack-store thesis (the company has since rebranded to Coldsignal — see [LIN-17](/LIN/issues/LIN-17) and [LIN-19](/LIN/issues/LIN-19) for the rename history). That pack-store thesis was killed on 2026-04-27 by the CEO (saturated marketplace, AgentPacks already there). The repo was repurposed; the catalogue UI and `cold-email-triage` / `listing-generator` packs were removed. Other in-flight experiments (`app/mcp-audit/` for LIN-12, `app/e3-*` for LIN-13) live alongside this one.
 
 ## What ships
 

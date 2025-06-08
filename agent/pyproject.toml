@@ -3,7 +3,7 @@ name = "triagepack"
 version = "0.1.0-dev"
 description = "Audited Claude agent that triages PagerDuty alerts, pulls context via MCP, and posts a proposed RCA to Slack."
 requires-python = ">=3.12"
-authors = [{ name = "Packforge / triagepack team" }]
+authors = [{ name = "Coldsignal / triagepack team" }]
 license = { text = "Proprietary" }
 
 # Pinned versions — every change here goes through SECURITY.md audit.

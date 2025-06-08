@@ -88,10 +88,10 @@ the ambiguity.
 
 ## Links
 
-- Product page: https://packforge.dev/?source=e3-{channel}
-- Install instructions: https://packforge.dev/install?source=e3-{channel}
-- Source / SBOM: https://github.com/packforge/triagepack (private until v1)
-- Support: support@packforge.dev
+- Product page: https://coldsignal.dev/?source=e3-{channel}
+- Install instructions: https://coldsignal.dev/install?source=e3-{channel}
+- Source / SBOM: https://github.com/coldsignal/triagepack (private until v1)
+- Support: support@coldsignal.dev
 
 Replace `{channel}` per-listing: `mcpmarket`, `agentpacks`, `mcpize`,
 `mcpmarketplaceio`, `smithery`, `mcpso`. The allowlist lives in

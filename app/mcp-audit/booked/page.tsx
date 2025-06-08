@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Audit booked — Packforge",
+  title: "Audit booked — Coldsignal",
 };
 
 export default function BookedPage() {

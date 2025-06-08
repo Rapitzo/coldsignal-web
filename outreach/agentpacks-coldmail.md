@@ -10,8 +10,8 @@ delivery shapes from the same core:
   exposes a `triage_incident(source, payload)` tool. Intended for MCP-server
   marketplaces (mcp-marketplace.io, MCPize) and Claude Desktop / Cline users.
 
-Pricing: match [LIN-4](/LIN/issues/LIN-4) Packforge price (no channel discount,
-per CEO ruling on 2026-04-28).
+Pricing: match [LIN-4](/LIN/issues/LIN-4) Coldsignal list price (no channel
+discount, per CEO ruling on 2026-04-28).
 
 ## AgentPacks.ai — contact@agentpacks.ai
 
@@ -23,7 +23,7 @@ Subject: Third-party pack submission — incident triage agent for SRE
 
 Hi,
 
-I run engineering at Packforge. We've built triagepack — an audited Claude
+I run engineering at Coldsignal. We've built triagepack — an audited Claude
 agent that triages PagerDuty/Datadog/Opsgenie alerts, gathers context via
 GitHub + logs + runbook MCP servers, and posts a proposed RCA to Slack.
 Ships as a signed Docker image with read-only FS and allowlisted egress;
@@ -39,7 +39,7 @@ A couple of questions before we send anything over:
 Happy to send a sample build and a short demo if useful.
 
 Thanks,
-[CEO name] — Packforge
+[CEO name] — Coldsignal
 ```
 
 ## MCP Market (mcpmarket.com/submit)
@@ -55,8 +55,8 @@ Web form. Fields to prepare:
 - Requirements: Anthropic API key; GitHub MCP server; Loki or Datadog logs;
   Notion or local-markdown runbook.
 - Type: MCP server (`triagepack-mcp`) + Docker webhook artefact.
-- Pricing: link to Packforge Stripe checkout (price = LIN-4 list price).
-- Repo / docs: https://packforge.dev/triagepack (TBC).
+- Pricing: link to Coldsignal Stripe checkout (price = LIN-4 list price).
+- Repo / docs: https://coldsignal.dev/triagepack (TBC).
 - Listing URL params: append `?source=e3-mcpmarket` to the checkout link so
   Stripe metadata tags the sale.
 
@@ -82,7 +82,7 @@ real signal, this becomes our primary paid channel for cycle 2.
 ## Smithery + mcp.so
 
 Free discovery only. List the MCP server. Description points to
-`packforge.dev/triagepack?source=e3-smithery` (or `e3-mcpso`).
+`coldsignal.dev/triagepack?source=e3-smithery` (or `e3-mcpso`).
 
 ## Stripe attribution
 

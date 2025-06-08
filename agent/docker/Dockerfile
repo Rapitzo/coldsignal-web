@@ -5,7 +5,7 @@ COPY triagepack ./triagepack
 RUN pip install --no-cache-dir --upgrade pip && pip wheel --no-deps --wheel-dir /wheels .
 
 FROM python:3.12-slim
-LABEL org.opencontainers.image.source="https://github.com/packforge/triagepack"
+LABEL org.opencontainers.image.source="https://github.com/coldsignal/triagepack"
 LABEL org.opencontainers.image.licenses="Proprietary"
 
 # Non-root user. Read-only root FS at runtime is enforced by docker-compose.

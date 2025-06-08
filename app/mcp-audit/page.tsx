@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "MCP Audit — $499 per stack | Packforge",
+  title: "MCP Audit — $499 per stack | Coldsignal",
   description:
     "Independent audit of your MCP server stack against the April 2026 RCE class. Five business days. $499 flat.",
 };

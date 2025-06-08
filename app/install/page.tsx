@@ -43,7 +43,7 @@ const DOCKER_SNIPPET = `docker run --rm \\
   --read-only --cap-drop=ALL \\
   -e ANTHROPIC_API_KEY=sk-ant-... \\
   -e SLACK_BOT_TOKEN=xoxb-... \\
-  ghcr.io/packforge/triagepack:0.1.0`;
+  ghcr.io/coldsignal/triagepack:0.1.0`;
 
 export default async function InstallPage({
   searchParams,
@@ -132,7 +132,7 @@ export default async function InstallPage({
       </section>
 
       <footer className="mt-20 border-t border-zinc-800 pt-6 text-sm text-zinc-500">
-        Trouble installing? Email <a href="mailto:support@packforge.dev" className="text-zinc-300 underline">support@packforge.dev</a>.
+        Trouble installing? Email <a href="mailto:support@coldsignal.dev" className="text-zinc-300 underline">support@coldsignal.dev</a>.
       </footer>
     </main>
   );

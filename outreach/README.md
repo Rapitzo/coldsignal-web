@@ -40,7 +40,7 @@ Idempotency: the sender refuses to send the same `approvalId` twice.
 
 | Step | Owner | Status |
 |---|---|---|
-| Pick sending domain | Board | Recommend `packforge.dev` |
+| Pick sending domain | Board | Recommend `coldsignal.dev` |
 | Create Resend account at [resend.com](https://resend.com) | Board | Pending |
 | Add domain in Resend dashboard | Board | Pending |
 | Drop DNS records at registrar (TXT × 3) | Board | Pending — Resend generates them after domain is added |
@@ -53,8 +53,8 @@ Resend free tier covers 100/day, 3 000/mo. Plenty for cycle 1.
 ```
 .env.local        (gitignored — never committed)
 RESEND_API_KEY=re_xxx_yyy
-RESEND_FROM_DOMAIN=packforge.dev
-RESEND_REPLY_TO=hello@packforge.dev   # whatever inbox the board reads
+RESEND_FROM_DOMAIN=coldsignal.dev
+RESEND_REPLY_TO=hello@coldsignal.dev   # whatever inbox the board reads
 ```
 
 The sender skill reads these from `process.env`. If `RESEND_API_KEY` is
