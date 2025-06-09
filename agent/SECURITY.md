@@ -44,6 +44,13 @@ The pack still imports the official `mcp` Python SDK so buyers can attach _their
 - **Unsanitised tool input**: Notion database query is constructed via the SDK with parameterised fields, no string concatenation. Local-markdown path resolves `RUNBOOK_DIR` and uses `pathlib.Path.resolve()` then asserts the result is inside `RUNBOOK_DIR` to prevent path traversal. Pass.
 - **Outbound network**: `api.notion.com` only on the Notion path; no network on the local-markdown path. Pass.
 
+### Webhook receiver (`triagepack/webhook.py`)
+
+- **Closed-by-default signature gate.** `/v1/incidents` rejects any POST whose `X-PagerDuty-Signature` header does not HMAC-SHA256-match the raw body under `PAGERDUTY_WEBHOOK_SECRET`. If the env var is unset, the endpoint refuses every request — including the operator's first deploy. Silent accept-on-missing-secret was rejected as a footgun; an attacker who reaches the public endpoint in a misconfigured deploy could otherwise burn Anthropic spend and inject crafted alerts into Slack. Verified by `agent/tests/test_webhook_signature.py`.
+- **Constant-time compare.** `hmac.compare_digest` everywhere; no early-return bytewise loop.
+- **Rotation supported.** PagerDuty sends comma-separated `v1=<hex>` values during rotation; we accept the request if any entry verifies. Lets operators rotate the shared value without a maintenance window.
+- **Body parse errors are 400, not 5xx.** Malformed JSON or unparseable PagerDuty payload returns 400 with the parser error string, so the Slack pipeline never sees a half-validated alert.
+
 ### Anthropic SDK call
 
 - Sole outbound call from the reasoning loop: `api.anthropic.com`. Pinned to `anthropic==0.39.0`. The model output is JSON-parsed via `_extract_json` and validated against the `TriageResult` Pydantic schema before being templated into the Slack Block Kit card; non-JSON, schema-mismatch, or low-confidence responses degrade to the explicit `needs-human` path with no suggested fix shown.

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import hmac
 import logging
 import os
 from typing import Any
@@ -18,6 +20,31 @@ log = logging.getLogger("triagepack.webhook")
 
 app = FastAPI(title="triagepack", version="0.1.0-dev")
 
+_PD_SECRET_ENV = "PAGERDUTY_WEBHOOK_SECRET"
+
+
+def _verify_pagerduty_signature(raw: bytes, header_value: str | None) -> bool:
+    """Constant-time HMAC-SHA256 verification of the PagerDuty webhook signature.
+
+    Returns True iff the env var is set and at least one v1 hash in the header
+    matches. PagerDuty sends comma-separated v1=<hex> values during rotation;
+    we accept the request if any one verifies.
+
+    Returns False on any of: missing env var, missing header, malformed
+    header, mismatch.
+    """
+    shared = os.environ.get(_PD_SECRET_ENV, "")
+    if not shared or not header_value:
+        return False
+    expected = hmac.new(shared.encode("utf-8"), raw, hashlib.sha256).hexdigest()
+    for entry in header_value.split(","):
+        entry = entry.strip()
+        if not entry.startswith("v1="):
+            continue
+        if hmac.compare_digest(entry[3:], expected):
+            return True
+    return False
+
 
 @app.get("/health")
 def health() -> dict[str, str]:
@@ -31,9 +58,18 @@ async def pagerduty_incident(
     x_pagerduty_signature: str | None = Header(default=None),
 ) -> dict[str, str]:
     raw = await request.body()
-    # TODO Day 6: verify HMAC signature against PAGERDUTY_WEBHOOK_SECRET
-    # TODO Day 6: rate-limit per source IP
-    payload: dict[str, Any] = await request.json()
+
+    # Closed by default: a missing shared secret means the receiver refuses
+    # every request, including the operator's first deploy. Silently accepting
+    # unsigned POSTs would let any attacker who reaches the endpoint trigger
+    # Anthropic spend and inject crafted alerts into Slack.
+    if not _verify_pagerduty_signature(raw, x_pagerduty_signature):
+        raise HTTPException(status_code=401, detail="invalid or missing signature")
+
+    try:
+        payload: dict[str, Any] = await request.json()
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=f"invalid JSON: {exc}")
     try:
         alert = from_pagerduty(payload)
     except Exception as exc:
