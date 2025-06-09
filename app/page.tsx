@@ -110,10 +110,9 @@ export default async function HomePage({
       </section>
 
       <section className="mt-16 rounded-lg border border-zinc-800 bg-zinc-950 p-6">
-        <h2 className="text-xl font-semibold">Already a buyer? Install with one MCP config block or a Docker run.</h2>
+        <h2 className="text-xl font-semibold">Already a buyer? Install in one MCP config block, or one Docker run.</h2>
         <p className="mt-2 text-sm text-zinc-400">
-          Drop the MCP server into Claude Desktop / Cline, or run the Docker image as a webhook
-          receiver. One licence covers both.
+          Drop the MCP server into Claude Desktop or Cline, or run the Docker image as a webhook receiver. One licence covers both.
         </p>
         <a
           href={`/install${source ? `?source=${encodeURIComponent(source)}` : ""}`}

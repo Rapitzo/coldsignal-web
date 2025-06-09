@@ -16,7 +16,7 @@ export const PRODUCT = {
   workingTitle: "triagepack",
   eyebrow: "For on-call SRE and DevOps teams who'd like quieter nights.",
   tagline:
-    "An audited agent that takes a PagerDuty alert and posts to Slack a proposed RCA, the suspected commit, the relevant log lines, and a confidence score.",
+    "Takes a PagerDuty alert and posts to Slack: a proposed RCA, the suspected commit, the relevant log lines, a confidence score. Audited end-to-end.",
   pillars: [
     {
       title: "Security-audited",
@@ -24,11 +24,11 @@ export const PRODUCT = {
     },
     {
       title: "Verified to run",
-      body: "30 anonymised PagerDuty incident scenarios in the eval suite. Pass-rate ships with the release; you can re-run on your own infra.",
+      body: "30 anonymised PagerDuty scenarios in the eval suite. Pass-rate ships with the release. Re-run them on your own infra.",
     },
     {
       title: "Built-in observability",
-      body: "OpenTelemetry baked into the agent core. One-line config to point spans at Grafana, Datadog, Phoenix, or Braintrust.",
+      body: "OpenTelemetry built into the agent core. One line of config points spans at Grafana, Datadog, Phoenix, or Braintrust.",
     },
   ],
   prices: [
@@ -37,7 +37,7 @@ export const PRODUCT = {
       label: "Per seat / month",
       amountUsd: 49,
       unit: "$49 / seat / month",
-      caption: "Cancel any time. Includes ongoing audited updates.",
+      caption: "Cancel any time. Audited updates included.",
       stripePriceId: null,
     },
     {
