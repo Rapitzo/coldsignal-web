@@ -1,0 +1,10 @@
+# Default egress allowlist for triagepack v0.1 sandbox.
+# Anchored to end-of-host; tinyproxy uses regex against the destination host.
+\.anthropic\.com$
+\.github\.com$
+\.slack\.com$
+slack\.com$
+events\.pagerduty\.com$
+api\.notion\.com$
+api\.datadoghq\.com$
+api\.datadoghq\.eu$

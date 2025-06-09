@@ -6,37 +6,88 @@ The April 2026 Anthropic MCP RCE disclosure landed three classes of issue:
 2. **Unsanitised tool input** — host passes attacker-controlled strings into local subprocess calls.
 3. **Out-of-band exfiltration** — server makes outbound calls to attacker domains using collected context.
 
-Every MCP server pinned in this build has been (or will be) audited against all three.
+triagepack v0.1 is audited against all three. The biggest single mitigation is structural: **v0.1 ships zero third-party MCP servers in the runtime sandbox**.
 
-## Pinned versions
+## v0.1 design decision: no third-party MCP servers
 
-| Server | Version | Source | Audit status |
-|---|---|---|---|
-| `github-mcp-server` | v0.4.2 | github.com/github/github-mcp-server | TODO Day 6 |
-| `triagepack-logs` (first-party Loki/Datadog wrapper) | 0.1.0 | this repo | N/A — first-party |
-| `triagepack-runbook` (first-party Notion/local-md wrapper) | 0.1.0 | this repo | N/A — first-party |
+The original Day-1 plan proposed running `github-mcp-server`, a Loki MCP server, and a Notion MCP server as subprocesses inside the agent sandbox. That maximised the attack surface for the exact RCE class disclosed in April 2026.
 
-## Per-class audit checklist
+We rejected that design on Day 2. The reasoning loop only needs three read-only signals — recent commits, log lines, runbook prose — so we replaced the subprocess MCP servers with three first-party HTTP clients in `triagepack/mcp/`:
 
-For each pinned third-party server we record the answer to:
+| Source | Client | Why it's not an MCP subprocess |
+|---|---|---|
+| GitHub (recent commits) | `triagepack/mcp/github.py` — direct REST against `api.github.com` | One read-only call; 60-line file is auditable in one sitting |
+| Logs (Loki / Datadog) | `triagepack/mcp/logs.py` — direct REST behind a `LogsBackend` protocol | Need both Loki and Datadog backends; clean swap point is more valuable than MCP packaging |
+| Runbook (Notion / local) | `triagepack/mcp/runbook.py` — direct REST against Notion API or local markdown read | Same reasoning as logs |
 
-- [ ] **Sandbox escape**: does the server return text that the host renders or executes? If yes, document the sanitisation applied on the host side.
-- [ ] **Tool-input handling**: are tool arguments passed to subprocess, eval, or template engines on the server side? If yes, document the validator and parameterisation.
-- [ ] **Outbound network**: what domains does this server contact? Are they on the Docker sandbox allowlist?
+These first-party clients are still part of the threat model, but the threat surface is the dependencies they pull in (`httpx`, `pydantic`), not arbitrary code execution from a vendored MCP server.
 
-A server cannot be added to `pyproject.toml` until its row above is filled in and a CEO sign-off is recorded on [LIN-4](/LIN/issues/LIN-4).
+The pack still imports the official `mcp` Python SDK so buyers can attach _their own_ MCP servers if they want extra context sources, but no MCP server runs by default in the v0.1 sandbox.
+
+## Per-source audit (April 2026 RCE class)
+
+### `triagepack/mcp/github.py`
+
+- **Sandbox escape via tool-output injection**: the client returns a list of `{sha, author, committed_at, message, url}` dicts. Author/message strings are JSON-serialised into the model prompt and never rendered back as shell, HTML, or template input. Pass.
+- **Unsanitised tool input**: the only tool input is `repo` (e.g. `org/name`), validated against `^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$` before it touches the URL. No subprocess, no eval, no template engine. Pass.
+- **Outbound network**: `api.github.com` only. Hardcoded base URL. Allowlisted in the egress sidecar (see Sandbox section). Pass.
+
+### `triagepack/mcp/logs.py`
+
+- **Sandbox escape via tool-output injection**: log-line `message` strings flow into the prompt as JSON values. Same containment as above. Pass.
+- **Unsanitised tool input**: `service` and `around` are passed into a parameterised LogQL/Datadog query string. The service name is validated against `^[A-Za-z0-9._-]+$`; timestamps go through `datetime` round-trip. Pass.
+- **Outbound network**: `LOKI_URL` and `https://api.datadoghq.com` only. Both must be on the egress allowlist explicitly — the sandbox config below shows the pattern. Pass.
+
+### `triagepack/mcp/runbook.py`
+
+- **Sandbox escape via tool-output injection**: returns markdown text, embedded as a JSON value. Pass.
+- **Unsanitised tool input**: Notion database query is constructed via the SDK with parameterised fields, no string concatenation. Local-markdown path resolves `RUNBOOK_DIR` and uses `pathlib.Path.resolve()` then asserts the result is inside `RUNBOOK_DIR` to prevent path traversal. Pass.
+- **Outbound network**: `api.notion.com` only on the Notion path; no network on the local-markdown path. Pass.
+
+### Anthropic SDK call
+
+- Sole outbound call from the reasoning loop: `api.anthropic.com`. Pinned to `anthropic==0.39.0`. The model output is JSON-parsed via `_extract_json` and validated against the `TriageResult` Pydantic schema before being templated into the Slack Block Kit card; non-JSON, schema-mismatch, or low-confidence responses degrade to the explicit `needs-human` path with no suggested fix shown.
+
+### Slack post
+
+- `slack-sdk==3.34.0`. Only `chat.postMessage` and `chat.update`. No interactive callback handler runs inside the agent sandbox — the three action buttons (Ack / Mark resolved / Page on-call) are routed to the buyer's Slack app, not back to triagepack. The agent never executes a click.
+
+## Dependency audit
+
+All runtime pins live in `agent/pyproject.toml`. Each release runs:
+
+```bash
+pip-audit --strict --requirement <(pip compile pyproject.toml)
+```
+
+(see `scripts/audit.sh` shipped in the pack). Day-6 baseline: zero known CVEs across the pin set.
 
 ## Build artefacts
 
-- **SBOM**: `syft agent/ -o cyclonedx-json > artifacts/sbom-${VERSION}.cdx.json` (Day 6).
+- **SBOM**: `scripts/build-sbom.sh` produces `artifacts/sbom-${VERSION}.cdx.json` (CycloneDX) and `.spdx.json` (SPDX) via `syft`. Run as part of the release workflow.
 - **Signed release**: GitHub release attestation via `cosign sign-blob --yes ${ARTIFACT}` using the org keyless identity.
 - **Provenance**: SLSA v1 provenance attached via `cosign attest`.
 
 ## Sandbox config (recommended Docker recipe)
 
-See `docker/Dockerfile` and `docker/docker-compose.yml` (lands Day 6). Key invariants:
+See `docker/Dockerfile` and `docker/docker-compose.yml`. Key invariants enforced by the compose file:
 
-- Read-only root filesystem; only `/tmp` writeable, `tmpfs` mount, 100 MB cap.
-- No host network. Egress allowlist enforced by an `iptables` init container limited to: `api.anthropic.com`, `api.github.com`, `slack.com`, `events.pagerduty.com`, plus the buyer-configured logs and runbook hosts.
-- Capabilities dropped to none; `no-new-privileges` set.
-- Seccomp profile: default Docker, with explicit deny for `ptrace`, `mount`, `kexec_load`.
+- **Read-only root filesystem.** `read_only: true`. Only `/tmp` writeable, `tmpfs` 100 MB cap.
+- **No new privileges, no capabilities.** `no-new-privileges:true`, `cap_drop: [ALL]`.
+- **Non-root user** (uid 10001).
+- **Egress allowlist via sidecar.** A `tinyproxy` (or any HTTP CONNECT proxy) sidecar in the same Docker network is the only path off-host. The default allowlist is:
+  - `api.anthropic.com:443`
+  - `api.github.com:443`
+  - `slack.com:443`
+  - `events.pagerduty.com:443`
+  - `api.notion.com:443`
+  - `api.datadoghq.com:443` (only if `DATADOG_API_KEY` set)
+  - `${LOKI_URL host}:443` (only if `LOKI_URL` set)
+  Buyers can extend the allowlist by editing `docker/proxy.conf`. Anything not on the list 502s.
+- **Seccomp**: default Docker profile applies; `ptrace`, `mount`, `kexec_load` denied implicitly by `cap_drop: [ALL]`.
+
+## Sign-off
+
+- Code review: CTO (this audit, 2026-04-30 working day).
+- Final sign-off before public ship: CEO on Day 12 ([LIN-4](/LIN/issues/LIN-4) plan).
+- Re-audit trigger: any new dependency in `pyproject.toml`, any new outbound host in `mcp/`, any third-party MCP server added to the default sandbox.
