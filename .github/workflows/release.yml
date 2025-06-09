@@ -1,0 +1,72 @@
+name: triagepack release
+
+# Cosign keyless signing requires the workflow to bind to GitHub's OIDC
+# identity, so this workflow is the canonical release path. Local
+# `bash agent/scripts/release.sh` works for dev but signs as a developer
+# identity, not the org one. Production releases must run here.
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (without leading v)"
+        required: true
+
+permissions:
+  contents: write    # gh release create
+  id-token: write    # cosign keyless OIDC
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: agent
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install build pip-audit==2.7.3 pip-tools
+
+      - name: Install syft
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh \
+            | sh -s -- -b /usr/local/bin v1.18.0
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3
+        with:
+          cosign-release: "v2.4.1"
+
+      - name: Dependency audit
+        run: bash scripts/audit.sh
+
+      - name: Run release.sh
+        env:
+          VERSION: ${{ inputs.version || github.ref_name }}
+          # gh CLI auto-picks GH_TOKEN from the runner's auto-injected
+          # GITHUB_TOKEN secret; explicit forwarding shown for clarity.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/release.sh
+
+      - name: Upload SBOM artefacts (build cache)
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-${{ inputs.version || github.ref_name }}
+          path: |
+            agent/artifacts/*.cdx.json
+            agent/artifacts/*.spdx.json
+            agent/artifacts/*.cosign.bundle
+            agent/artifacts/*.attestation.bundle
+          if-no-files-found: error
