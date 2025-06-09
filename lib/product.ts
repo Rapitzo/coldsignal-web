@@ -6,6 +6,7 @@ export type Price = {
   label: string;
   amountUsd: number;
   unit: string;
+  caption?: string;
   stripePriceId: string | null;
 };
 
@@ -13,8 +14,9 @@ export const PRODUCT = {
   slug: "incident-triage",
   name: "Incident Triage Agent",
   workingTitle: "triagepack",
+  eyebrow: "For on-call SRE and DevOps teams who'd like quieter nights.",
   tagline:
-    "An audited Claude agent that triages PagerDuty alerts, pulls the right context via MCP, and posts a proposed RCA to Slack before your on-call finishes their coffee.",
+    "An audited agent that takes a PagerDuty alert and posts to Slack a proposed RCA, the suspected commit, the relevant log lines, and a confidence score.",
   pillars: [
     {
       title: "Security-audited",
@@ -35,13 +37,15 @@ export const PRODUCT = {
       label: "Per seat / month",
       amountUsd: 49,
       unit: "$49 / seat / month",
+      caption: "Cancel any time. Includes ongoing audited updates.",
       stripePriceId: null,
     },
     {
       type: "onetime",
       label: "One-time licence",
-      amountUsd: 199,
-      unit: "$199 one-time",
+      amountUsd: 499,
+      unit: "$499 one-time",
+      caption: "10 months, then yours. Updates for 12 months included.",
       stripePriceId: null,
     },
   ] satisfies Price[],

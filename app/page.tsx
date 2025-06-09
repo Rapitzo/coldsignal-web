@@ -16,7 +16,7 @@ export default async function HomePage({
     <main className="mx-auto max-w-4xl px-6 py-20">
       <header>
         <p className="mb-3 text-sm uppercase tracking-widest text-emerald-400">
-          For SRE and DevOps teams running Claude in production
+          {PRODUCT.eyebrow}
         </p>
         <h1 className="text-5xl font-semibold leading-tight">{PRODUCT.name}</h1>
         <p className="mt-6 max-w-2xl text-lg text-zinc-300">{PRODUCT.tagline}</p>
@@ -31,36 +31,55 @@ export default async function HomePage({
         ))}
       </section>
 
-      <section className="mt-16">
-        <h2 className="mb-4 text-2xl font-semibold">Pricing</h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          {PRODUCT.prices.map((price) => (
-            <form
-              key={price.type}
-              action="/api/checkout"
-              method="post"
-              className="rounded-lg border border-zinc-800 bg-zinc-950 p-6"
-            >
-              <input type="hidden" name="priceType" value={price.type} />
-              <input type="hidden" name="source" value={source} />
-              <p className="text-sm uppercase tracking-wider text-zinc-500">{price.label}</p>
-              <p className="mt-2 text-3xl font-semibold">{price.unit}</p>
-              <button
-                type="submit"
-                className="mt-6 w-full rounded-md bg-zinc-100 px-4 py-2 font-medium text-zinc-900 hover:bg-white disabled:opacity-50"
-                disabled={!price.stripePriceId}
-              >
-                {price.stripePriceId ? "Buy now" : "Join waitlist"}
-              </button>
-            </form>
-          ))}
-        </div>
-        <p className="mt-3 text-xs text-zinc-500">
-          Stripe live mode flips when the security checklist is signed off. Until then both buttons drop you on the waitlist.
+      <section className="mt-16 rounded-lg border border-emerald-900/60 bg-emerald-950/20 p-6">
+        <h2 className="text-xl font-semibold text-emerald-100">Why we say "audited"</h2>
+        <p className="mt-3 text-sm text-zinc-300">
+          April 2026's MCP RCE disclosure landed three classes of issue: sandbox escape via tool-output injection, unsanitised tool input, and out-of-band exfiltration. Most off-the-shelf MCP packs are exposed to all three because they bundle third-party MCP servers as subprocesses inside the agent sandbox.
+        </p>
+        <p className="mt-3 text-sm text-zinc-300">
+          <span className="font-semibold text-emerald-200">v0.1 ships zero third-party MCP servers in the runtime sandbox.</span>{" "}
+          The three signals the agent needs (recent commits, log lines, runbook prose) come from small first-party REST clients we wrote, audit, and pin ourselves. The egress proxy in the Docker recipe enforces a fixed allowlist (Anthropic, GitHub, Slack, PagerDuty, Notion, Datadog) — anything else 403s.
+        </p>
+        <p className="mt-3 text-sm text-zinc-300">
+          The SBOM, signed release attestation, audit notes, and eval suite ship with the download. Re-run the evals on your own infra.
         </p>
       </section>
 
-      <section className="mt-16 max-w-xl">
+      <section className="mt-16">
+        <h2 className="mb-4 text-2xl font-semibold">Pricing</h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          {PRODUCT.prices.map((price) => {
+            const stripeReady = !!price.stripePriceId;
+            return (
+              <form
+                key={price.type}
+                action={stripeReady ? "/api/checkout" : "#waitlist"}
+                method={stripeReady ? "post" : "get"}
+                className="rounded-lg border border-zinc-800 bg-zinc-950 p-6"
+              >
+                <input type="hidden" name="priceType" value={price.type} />
+                <input type="hidden" name="source" value={source} />
+                <p className="text-sm uppercase tracking-wider text-zinc-500">{price.label}</p>
+                <p className="mt-2 text-3xl font-semibold">{price.unit}</p>
+                {price.caption ? (
+                  <p className="mt-2 text-xs text-zinc-500">{price.caption}</p>
+                ) : null}
+                <button
+                  type="submit"
+                  className="mt-6 w-full rounded-md bg-zinc-100 px-4 py-2 font-medium text-zinc-900 hover:bg-white"
+                >
+                  {stripeReady ? "Buy now" : "Notify me when ready"}
+                </button>
+              </form>
+            );
+          })}
+        </div>
+        <p className="mt-3 text-xs text-zinc-500">
+          Stripe live mode flips when the security checklist is signed off. Until then both buttons jump to the waitlist below.
+        </p>
+      </section>
+
+      <section id="waitlist" className="mt-16 max-w-xl scroll-mt-16">
         <h2 className="mb-3 text-2xl font-semibold">Get notified</h2>
         {justSubscribed ? (
           <p className="rounded-md border border-emerald-700 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200">
@@ -90,22 +109,8 @@ export default async function HomePage({
         )}
       </section>
 
-      <section className="mt-16 rounded-lg border border-emerald-900/60 bg-emerald-950/20 p-6">
-        <h2 className="text-xl font-semibold text-emerald-100">Why we say "audited"</h2>
-        <p className="mt-3 text-sm text-zinc-300">
-          April 2026's MCP RCE disclosure landed three classes of issue: sandbox escape via tool-output injection, unsanitised tool input, and out-of-band exfiltration. Most off-the-shelf MCP packs are exposed to all three because they bundle third-party MCP servers as subprocesses inside the agent sandbox.
-        </p>
-        <p className="mt-3 text-sm text-zinc-300">
-          <span className="font-semibold text-emerald-200">v0.1 ships zero third-party MCP servers in the runtime sandbox.</span>{" "}
-          The three signals the agent needs (recent commits, log lines, runbook prose) come from small first-party REST clients we wrote, audit, and pin ourselves. The egress proxy in the Docker recipe enforces a fixed allowlist (Anthropic, GitHub, Slack, PagerDuty, Notion, Datadog) — anything else 403s.
-        </p>
-        <p className="mt-3 text-sm text-zinc-300">
-          You get the SBOM, the signed release attestation, the audit notes, and the eval suite as part of the download. Re-run the evals on your own infra; we'll publish the pass-rate ourselves and you can confirm it.
-        </p>
-      </section>
-
       <section className="mt-16 rounded-lg border border-zinc-800 bg-zinc-950 p-6">
-        <h2 className="text-xl font-semibold">Already a buyer? Install in two minutes.</h2>
+        <h2 className="text-xl font-semibold">Already a buyer? Install with one MCP config block or a Docker run.</h2>
         <p className="mt-2 text-sm text-zinc-400">
           Drop the MCP server into Claude Desktop / Cline, or run the Docker image as a webhook
           receiver. One licence covers both.
