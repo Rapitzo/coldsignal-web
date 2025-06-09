@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-30T15:06:42Z","level":"warn","message":"elasticsearch: high disk watermark exceeded on node search-data-2 (used=89%); shard relocation off","host":"search-data-2"},
+  {"ts":"2026-04-30T15:06:55Z","level":"warn","message":"elasticsearch: 14 shards unassigned (reason: NODE_LEFT, target node has flood-stage watermark)","host":"search-master-1"},
+  {"ts":"2026-04-30T15:07:11Z","level":"error","message":"search-api: query timeout on index events-2026.04 (no replica available)","host":"search-api-3"}
+]

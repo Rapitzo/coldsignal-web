@@ -1,0 +1,1 @@
+{"event":{"id":"evt_018","event_type":"incident.triggered","occurred_at":"2026-04-30T15:08:00Z","data":{"type":"incident","id":"PINC-018","title":"search-api 5xx 4% on /search","description":"search-api errors climbing on /v1/search; cluster reports yellow with 14 unassigned shards.","severity":"error","status":"triggered","service":{"id":"PSVC-SEARCH","summary":"search-api"}}}}

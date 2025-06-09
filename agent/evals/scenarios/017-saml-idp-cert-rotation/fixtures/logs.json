@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-30T11:13:02Z","level":"error","message":"saml.assertion: signature verification failed (InvalidSignature) for issuer https://idp.example/okta tenant=tenant-acme","host":"sso-1"},
+  {"ts":"2026-04-30T11:13:14Z","level":"error","message":"saml.assertion: signature verification failed (InvalidSignature) for issuer https://idp.example/azure tenant=tenant-bigco","host":"sso-2"},
+  {"ts":"2026-04-30T11:13:30Z","level":"info","message":"local IdP metadata cache last refreshed 2026-04-23T00:00:00Z (expires 2026-04-30T00:00:00Z) — cert fingerprint mismatch on incoming assertions","host":"sso-1"}
+]

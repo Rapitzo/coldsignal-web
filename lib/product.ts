@@ -18,7 +18,7 @@ export const PRODUCT = {
   pillars: [
     {
       title: "Security-audited",
-      body: "Every MCP server pinned to a specific version and audited against the April 2026 RCE class. Ships with SBOM, signed release, and a recommended Docker sandbox config.",
+      body: "v0.1 ships zero third-party MCP servers in the runtime sandbox. Every dependency pinned, audited against the April 2026 RCE class, and shipped with SBOM, signed release, and an egress-allowlisted Docker sandbox config.",
     },
     {
       title: "Verified to run",

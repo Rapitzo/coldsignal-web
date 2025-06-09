@@ -1,0 +1,3 @@
+[
+  {"sha":"5566aabb01","author":"akumar","committed_at":"2026-04-30T07:00:00Z","message":"reporting: nightly recompute now runs in a single 4h transaction (was batched 200 chunks)","url":"https://github.example/acme/reporting-api/commit/5566aabb01"}
+]

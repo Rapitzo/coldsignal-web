@@ -1,0 +1,1 @@
+{"category":"auth","root_component":"saml","cause_family":"signing-cert","fix_keywords":["IdP signing certificate","metadata refresh","fingerprint","rollover","rotate","trust"]}

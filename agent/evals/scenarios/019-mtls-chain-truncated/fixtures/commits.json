@@ -1,0 +1,3 @@
+[
+  {"sha":"feed9988aa","author":"sec-bot","committed_at":"2026-04-30T18:18:00Z","message":"payments: rotate server cert; ship leaf only (was fullchain.pem)","url":"https://github.example/acme/payments-api/commit/feed9988aa"}
+]

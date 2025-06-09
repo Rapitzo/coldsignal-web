@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-30T22:09:18Z","level":"info","message":"mongod: index build on events.{userId:1, ts:-1} started 2026-04-30T18:00:00Z (foreground), still in collection-scan phase","host":"mongo-primary"},
+  {"ts":"2026-04-30T22:09:42Z","level":"warn","message":"mongod: write operation on events blocked waiting for collection lock (held by index build pid=2099)","host":"mongo-primary"},
+  {"ts":"2026-04-30T22:10:05Z","level":"error","message":"order-service: insert(events) timeout after 10000ms","host":"order-service-2"}
+]

@@ -1,0 +1,5 @@
+[
+  {"ts":"2026-04-30T07:41:13Z","level":"warn","message":"postgres: replica analytics-r1 WAL apply lag=412s (was <2s 30m ago)","host":"db-replica-1"},
+  {"ts":"2026-04-30T07:41:18Z","level":"warn","message":"postgres: long-running transaction pid=8821 user=reporting age=3402s holding snapshot","host":"db-primary"},
+  {"ts":"2026-04-30T07:41:25Z","level":"info","message":"replica cannot vacuum tuples newer than oldest snapshot held by primary","host":"db-replica-1"}
+]

@@ -1,0 +1,1 @@
+{"category":"data","root_component":"postgres","cause_family":"replication","fix_keywords":["WAL","long transaction","kill","vacuum","apply","replica"]}

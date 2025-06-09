@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-04-30T18:30:11Z","level":"error","message":"tls handshake failure from gateway-7: alert bad certificate; peer chain length=1","host":"payments-api-1"},
+  {"ts":"2026-04-30T18:30:33Z","level":"error","message":"x509: certificate signed by unknown authority (intermediate not presented)","host":"gateway-7"}
+]

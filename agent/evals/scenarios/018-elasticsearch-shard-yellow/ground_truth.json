@@ -1,0 +1,1 @@
+{"category":"data","root_component":"elasticsearch","cause_family":"shard-allocation","fix_keywords":["disk watermark","cluster.routing.allocation","reroute","unassigned shards","high","flood_stage"]}

@@ -1,0 +1,1 @@
+{"category":"data","root_component":"mongodb","cause_family":"index-build","fix_keywords":["foreground","background","createIndexes","kill","resource intensive","retry","drop"]}

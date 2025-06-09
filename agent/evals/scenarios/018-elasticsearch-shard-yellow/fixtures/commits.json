@@ -1,0 +1,3 @@
+[
+  {"sha":"77ee88dd02","author":"infra-bot","committed_at":"2026-04-30T13:30:00Z","message":"infra: shrink search-data-2 disk from 500GB -> 300GB to match cost target","url":"https://github.example/acme/infra/commit/77ee88dd02"}
+]
