@@ -63,6 +63,14 @@ that's what's set up in Resend with DNS records live. Sender addresses
 resolve to `hello@contact.coldsignal.dev`. The apex (`coldsignal.dev`) is
 not a sending domain.
 
+## Where replies land
+
+Resend is send-only. Inbound for `*@contact.coldsignal.dev` is wired
+through **Cloudflare Email Routing** — anything anyone replies to lands in
+`rickardlind94@gmail.com`. Setup tracked in
+[LIN-21](/LIN/issues/LIN-21). If a reply doesn't show up there, the
+routing is the first place to look.
+
 The sender skill reads these from `process.env`. If `RESEND_API_KEY` is
 missing, the skill exits with a board-action-required comment instead of
 attempting a send.
