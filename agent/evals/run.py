@@ -167,10 +167,19 @@ def main() -> int:
             print(f"  {r['id']:38} {' / '.join(r['reasons'])}")
 
     if args.write_baseline:
+        # Honesty rail: every --write-baseline call replaces the file with the
+        # full results of THIS run. No merging, no "best of N", no preserving
+        # better numbers from a previous run. The Day 13 (or last) measurement
+        # is what ships on the landing, even if it's worse than an earlier run.
         baseline_path = Path(args.scenarios_dir).parent / "baseline.json"
-        existing = json.loads(baseline_path.read_text(encoding="utf-8")) if baseline_path.is_file() else {}
-        existing.update({
-            "version": existing.get("version", "0.1.0-dev"),
+        prior_version = "0.1.0-dev"
+        if baseline_path.is_file():
+            try:
+                prior_version = json.loads(baseline_path.read_text(encoding="utf-8")).get("version", prior_version)
+            except json.JSONDecodeError:
+                pass
+        payload = {
+            "version": prior_version,
             "measured": True,
             "measuredAt": datetime.utcnow().isoformat() + "Z",
             "totalScenarios": len(results),
@@ -185,8 +194,9 @@ def main() -> int:
                 "highConfidenceTotal": high_conf,
                 "rate": round(calibration, 3),
             },
-        })
-        baseline_path.write_text(json.dumps(existing, indent=2) + "\n", encoding="utf-8")
+            "notes": f"Measured by evals.run on {datetime.utcnow().date().isoformat()}.",
+        }
+        baseline_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
         print(f"\nwrote baseline -> {baseline_path}")
 
     return 0 if pass_n == len(results) else 1

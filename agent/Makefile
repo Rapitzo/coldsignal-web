@@ -1,5 +1,5 @@
 # triagepack release helpers.
-.PHONY: sbom audit build sandbox-up sandbox-down evals
+.PHONY: sbom audit build sandbox-up sandbox-down evals evals-baseline release
 
 VERSION ?= $(shell grep -E '^version' pyproject.toml | head -1 | cut -d'"' -f2)
 
@@ -20,3 +20,9 @@ sandbox-down:
 
 evals:
 	python -m evals.run
+
+evals-baseline:
+	python -m evals.run --write-baseline
+
+release:
+	bash scripts/release.sh
