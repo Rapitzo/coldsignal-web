@@ -1,0 +1,1 @@
+{"category":"auth","root_component":"vault","cause_family":"secret-rotation","fix_keywords":["rotated","old credential","cache","reload","CSI driver","redeploy"]}

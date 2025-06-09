@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-05-01T16:09:11Z","level":"error","message":"notification-worker: schema validation failed message_id=m-8132 channel.id is null; receive_count=147","host":"notif-worker-1"},
+  {"ts":"2026-05-01T16:09:42Z","level":"warn","message":"DLQ notifications-dlq depth=0; maxReceiveCount=10000 (effectively disabled)","host":"notif-worker-3"}
+]

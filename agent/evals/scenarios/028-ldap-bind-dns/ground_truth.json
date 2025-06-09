@@ -1,0 +1,1 @@
+{"category":"auth","root_component":"ldap","cause_family":"dns","fix_keywords":["SRV record","_ldap._tcp","DNS resolution","domain controller","fallback","resolver"]}

@@ -1,6 +1,8 @@
 // Single-product config for Swarm E1 (Incident Triage Agent v1, working name "triagepack").
 // One landing page, two prices. No catalogue, no /packs/[slug] pages.
 
+import { passRateLine } from "./baseline";
+
 export type Price = {
   type: "monthly" | "onetime";
   label: string;
@@ -24,7 +26,7 @@ export const PRODUCT = {
     },
     {
       title: "Verified to run",
-      body: "30 anonymised PagerDuty scenarios in the eval suite. Pass-rate ships with the release. Re-run them on your own infra.",
+      body: passRateLine(),
     },
     {
       title: "Built-in observability",

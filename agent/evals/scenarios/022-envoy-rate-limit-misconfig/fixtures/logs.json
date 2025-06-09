@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-05-01T10:58:11Z","level":"warn","message":"envoy: local_rate_limit triggered descriptor=checkout source=internal-mesh","host":"envoy-edge-2"},
+  {"ts":"2026-05-01T10:58:30Z","level":"info","message":"envoy: 220 rps on /checkout (limit 100); 120 rejected","host":"envoy-edge-2"}
+]

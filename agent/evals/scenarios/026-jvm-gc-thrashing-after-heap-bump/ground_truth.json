@@ -1,0 +1,1 @@
+{"category":"app","root_component":"jvm","cause_family":"gc","fix_keywords":["G1","heap","Xmx","GC pause","tune","revert heap"]}

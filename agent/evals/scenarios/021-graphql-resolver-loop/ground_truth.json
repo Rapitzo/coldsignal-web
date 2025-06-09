@@ -1,0 +1,1 @@
+{"category":"app","root_component":"graphql","cause_family":"resolver","fix_keywords":["dataloader","N+1","recursive","depth limit","revert"]}

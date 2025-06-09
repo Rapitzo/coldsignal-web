@@ -1,0 +1,3 @@
+[
+  {"sha":"99aa11ff44","author":"infra-bot","committed_at":"2026-05-01T10:30:00Z","message":"envoy: tighten local_rate_limit on /checkout to 100 rps; descriptor missing 'internal' carve-out","url":"https://github.example/acme/envoy-config/commit/99aa11ff44"}
+]

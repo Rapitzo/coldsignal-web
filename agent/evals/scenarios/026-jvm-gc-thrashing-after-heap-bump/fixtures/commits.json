@@ -1,0 +1,3 @@
+[
+  {"sha":"aabb334455","author":"akumar","committed_at":"2026-05-02T00:30:00Z","message":"pricing-svc: bump -Xmx 4G -> 16G to handle catalog growth (kept G1 default region size)","url":"https://github.example/acme/pricing-svc/commit/aabb334455"}
+]

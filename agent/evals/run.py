@@ -116,6 +116,11 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--tag", help="filter by category")
     parser.add_argument("--scenarios-dir", default="evals/scenarios")
+    parser.add_argument(
+        "--write-baseline",
+        action="store_true",
+        help="Persist results to evals/baseline.json (consumed by the landing page).",
+    )
     args = parser.parse_args()
 
     root = Path(args.scenarios_dir)
@@ -160,6 +165,29 @@ def main() -> int:
     for r in results:
         if not r["passed"]:
             print(f"  {r['id']:38} {' / '.join(r['reasons'])}")
+
+    if args.write_baseline:
+        baseline_path = Path(args.scenarios_dir).parent / "baseline.json"
+        existing = json.loads(baseline_path.read_text(encoding="utf-8")) if baseline_path.is_file() else {}
+        existing.update({
+            "version": existing.get("version", "0.1.0-dev"),
+            "measured": True,
+            "measuredAt": datetime.utcnow().isoformat() + "Z",
+            "totalScenarios": len(results),
+            "passed": pass_n,
+            "passRate": round(pass_n / len(results), 3) if results else 0.0,
+            "byCategory": {
+                cat: {"total": by_cat[cat], "passed": pass_by_cat[cat]}
+                for cat in by_cat
+            },
+            "calibration": {
+                "highConfidenceCorrect": high_conf_correct,
+                "highConfidenceTotal": high_conf,
+                "rate": round(calibration, 3),
+            },
+        })
+        baseline_path.write_text(json.dumps(existing, indent=2) + "\n", encoding="utf-8")
+        print(f"\nwrote baseline -> {baseline_path}")
 
     return 0 if pass_n == len(results) else 1
 

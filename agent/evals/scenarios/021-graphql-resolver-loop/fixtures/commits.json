@@ -1,0 +1,3 @@
+[
+  {"sha":"abcd112233","author":"jdoe","committed_at":"2026-05-01T08:00:00Z","message":"graphql: drop dataloader on User.posts to simplify N+1 debug","url":"https://github.example/acme/api-gateway/commit/abcd112233"}
+]

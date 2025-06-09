@@ -1,0 +1,1 @@
+{"event":{"id":"evt_027","event_type":"incident.triggered","occurred_at":"2026-05-02T05:18:00Z","data":{"type":"incident","id":"PINC-027","title":"session-cache MOVED redirect storm","description":"session-cache clients seeing high MOVED redirect rate; tail latency on /me up 6x.","severity":"error","status":"triggered","service":{"id":"PSVC-CACHE","summary":"session-cache"}}}}

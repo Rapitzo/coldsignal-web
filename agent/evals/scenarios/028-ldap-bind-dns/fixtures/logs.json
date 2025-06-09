@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-05-02T08:53:00Z","level":"error","message":"ldap bind: lookup _ldap._tcp.corp.example: server misbehaving — falling back to dc-east-2 (NXDOMAIN)","host":"admin-portal-1"},
+  {"ts":"2026-05-02T08:53:30Z","level":"warn","message":"only 1 of 3 SRV records resolves; effective bind timeout 30s","host":"admin-portal-2"}
+]

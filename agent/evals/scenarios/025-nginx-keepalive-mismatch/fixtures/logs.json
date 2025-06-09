@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-05-01T19:19:11Z","level":"error","message":"nginx: upstream prematurely closed connection while reading response header from upstream, client: 1.2.3.4, request: GET /api/stream","host":"edge-3"},
+  {"ts":"2026-05-01T19:19:30Z","level":"info","message":"upstream app-3 reports keepalive=60s; edge keepalive_timeout=5s — race window","host":"edge-3"}
+]

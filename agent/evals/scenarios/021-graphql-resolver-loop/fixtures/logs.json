@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-05-01T08:28:14Z","level":"warn","message":"graphql resolver User.posts emitted 3214 db queries for one request id=req-7711","host":"api-gateway-3"},
+  {"ts":"2026-05-01T08:29:02Z","level":"error","message":"db connection pool exhausted (50/50) — resolvers blocking","host":"api-gateway-1"}
+]

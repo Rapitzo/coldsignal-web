@@ -1,0 +1,1 @@
+{"category":"infra","root_component":"envoy","cause_family":"rate-limit","fix_keywords":["rate_limit","descriptor","local_rate_limit","raise","exempt internal"]}

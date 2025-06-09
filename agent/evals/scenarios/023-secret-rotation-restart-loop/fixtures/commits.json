@@ -1,0 +1,3 @@
+[
+  {"sha":"7766aa11bb","author":"sec-bot","committed_at":"2026-05-01T13:30:00Z","message":"vault: rotate orders-db credential; update Secret manifest","url":"https://github.example/acme/secrets/commit/7766aa11bb"}
+]

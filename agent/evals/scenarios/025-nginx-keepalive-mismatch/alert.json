@@ -1,0 +1,1 @@
+{"event":{"id":"evt_025","event_type":"incident.triggered","occurred_at":"2026-05-01T19:21:00Z","data":{"type":"incident","id":"PINC-025","title":"web-edge 502s on long-poll endpoints","description":"web-edge 502 rate 4% on /api/stream and /api/long-poll endpoints. Direct origin healthy.","severity":"error","status":"triggered","service":{"id":"PSVC-EDGE","summary":"web-edge"}}}}

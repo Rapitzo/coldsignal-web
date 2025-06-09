@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-05-02T01:28:00Z","level":"warn","message":"jvm: G1 GC pause 412ms (heap 9.2G/16G); Mixed phase running every 8s","host":"pricing-svc-2"},
+  {"ts":"2026-05-02T01:29:11Z","level":"info","message":"G1 region size auto-selected 4M; with 16G heap that yields 4096 regions — high pause variance expected","host":"pricing-svc-1"}
+]

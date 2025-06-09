@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-05-02T05:16:14Z","level":"warn","message":"redis-cli: slot migration 5461..6826 from node-2 to node-5 in progress (cluster reshard started 04:50)","host":"redis-cluster-mgr"},
+  {"ts":"2026-05-02T05:17:01Z","level":"info","message":"client lib: 18% of GET commands hit MOVED redirect this minute","host":"session-cache-client"}
+]

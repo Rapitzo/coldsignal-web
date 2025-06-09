@@ -1,0 +1,4 @@
+[
+  {"ts":"2026-05-01T13:40:18Z","level":"error","message":"orders-worker init: psql FATAL password authentication failed for user orders","host":"orders-worker-7"},
+  {"ts":"2026-05-01T13:40:50Z","level":"info","message":"vault-csi: secret orders-db version=v17 mounted; pod still using cached env from v16","host":"orders-worker-7"}
+]

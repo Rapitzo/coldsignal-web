@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0-dev",
+  "measured": false,
+  "measuredAt": null,
+  "totalScenarios": 30,
+  "passed": null,
+  "passRate": null,
+  "byCategory": {
+    "infra": { "total": 6, "passed": null },
+    "app":   { "total": 8, "passed": null },
+    "data":  { "total": 8, "passed": null },
+    "auth":  { "total": 8, "passed": null }
+  },
+  "notes": "Day 8 placeholder. Populated by `python -m evals.run --write-baseline` once an Anthropic key is configured. Until then the landing copy reads `30 scenarios in the eval suite. Pass-rate published when measured.`"
+}

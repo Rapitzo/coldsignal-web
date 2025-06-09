@@ -1,0 +1,1 @@
+{"category":"data","root_component":"sqs","cause_family":"poison-message","fix_keywords":["dead-letter","DLQ","redrive","maxReceiveCount","poison","schema"]}

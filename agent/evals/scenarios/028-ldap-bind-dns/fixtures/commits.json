@@ -1,0 +1,3 @@
+[
+  {"sha":"ddee998877","author":"infra-bot","committed_at":"2026-05-02T08:30:00Z","message":"corp-dns: retire dc-east-2 SRV records (server scheduled for decommission)","url":"https://github.example/acme/corp-dns/commit/ddee998877"}
+]
