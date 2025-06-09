@@ -40,7 +40,8 @@ export const PRODUCT = {
       amountUsd: 49,
       unit: "$49 / seat / month",
       caption: "Cancel any time. Audited updates included.",
-      stripePriceId: null,
+      // Set in env per Stripe mode: STRIPE_PRICE_MONTHLY_TEST or _LIVE.
+      stripePriceId: process.env.STRIPE_PRICE_MONTHLY ?? null,
     },
     {
       type: "onetime",
@@ -48,7 +49,7 @@ export const PRODUCT = {
       amountUsd: 499,
       unit: "$499 one-time",
       caption: "10 months, then yours. Updates for 12 months included.",
-      stripePriceId: null,
+      stripePriceId: process.env.STRIPE_PRICE_ONETIME ?? null,
     },
   ] satisfies Price[],
   // GitHub release URL the buyer is redirected to (private repo, access granted by webhook on purchase)

@@ -1,4 +1,5 @@
 import { PRODUCT } from "@/lib/product";
+import { stripeMode } from "@/lib/stripe";
 
 type SearchParams = { source?: string | string[]; subscribed?: string | string[] };
 
@@ -12,6 +13,7 @@ export default async function HomePage({
   const source = rawSource ?? "";
   const rawSubscribed = Array.isArray(params.subscribed) ? params.subscribed[0] : params.subscribed;
   const justSubscribed = rawSubscribed === "1";
+  const mode = stripeMode();
   return (
     <main className="mx-auto max-w-4xl px-6 py-20">
       <header>
@@ -75,7 +77,11 @@ export default async function HomePage({
           })}
         </div>
         <p className="mt-3 text-xs text-zinc-500">
-          Stripe live mode flips when the security checklist is signed off. Until then both buttons jump to the waitlist below.
+          {mode === "live"
+            ? "Stripe live. Buy now charges your card and sends you the signed v1 release."
+            : mode === "test"
+              ? "Stripe TEST mode. Buy now charges a Stripe test card; nothing real is charged. Public checkout flips on once the security checklist is signed off."
+              : "Stripe is not yet wired up. Both buttons jump to the waitlist below."}
         </p>
       </section>
 
