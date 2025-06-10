@@ -64,7 +64,7 @@ async def pagerduty_incident(
     # unsigned POSTs would let any attacker who reaches the endpoint trigger
     # Anthropic spend and inject crafted alerts into Slack.
     if not _verify_pagerduty_signature(raw, x_pagerduty_signature):
-        raise HTTPException(status_code=401, detail="invalid or missing signature")
+        raise HTTPException(status_code=401, detail="invalid signature")
 
     try:
         payload: dict[str, Any] = await request.json()

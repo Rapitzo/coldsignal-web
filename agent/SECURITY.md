@@ -93,17 +93,22 @@ See `docker/Dockerfile` and `docker/docker-compose.yml`. Key invariants enforced
   Buyers can extend the allowlist by editing `docker/proxy.conf`. Anything not on the list 502s.
 - **Seccomp**: default Docker profile applies; `ptrace`, `mount`, `kexec_load` denied implicitly by `cap_drop: [ALL]`.
 
+## Known limitations
+
+- **Replay protection (PagerDuty webhook).** PagerDuty's `X-PagerDuty-Signature` scheme signs the body only, not a timestamp. A captured signed payload can be replayed against `/v1/incidents` indefinitely. Effect on triagepack is bounded by alert idempotency — PagerDuty assigns a stable `external_id` to each incident, so a replayed payload re-triggers triage for the same id (duplicate Slack thread, duplicate Anthropic call, no privilege gain). Buyers who care about replay can put a CDN/WAF rate-limit on the receiver host or move PagerDuty deliveries onto a queue with deduplication. We do not add a bespoke nonce store inside the agent because (a) it would be the only place the agent holds non-derivable state, and (b) the buyer-side mitigations are simpler and already part of standard SRE infrastructure.
+
 ## Sign-off
 
-- Code review: CTO (this audit, 2026-04-30 working day).
-- Final sign-off before public ship: CEO on Day 12 ([LIN-4](/LIN/issues/LIN-4) plan).
-- Re-audit trigger: any new dependency in `pyproject.toml`, any new outbound host in `mcp/`, any third-party MCP server added to the default sandbox.
+- Original audit: CTO, 2026-04-22 (Day 6 — first-party MCP design + sandbox + SBOM).
+- Webhook-gate amendment: CTO, 2026-04-28 (Day 12 — closed `/v1/incidents` HMAC gate, added Known limitations).
+- CEO sign-off: CEO, 2026-04-28, conditional on Day-12 commits.
+- Re-audit trigger: any new dependency in `pyproject.toml`, any new outbound host in `mcp/`, any third-party MCP server added to the default sandbox, any change to the webhook signature gate.
 
 ## Verification recipes (for buyers who don't trust us)
 
 Each public claim we make in the listing copy is verifiable from the release artefacts. Spot checks:
 
-- **"Zero third-party MCP servers in the runtime sandbox"**: `grep -E "^(mcp|github-mcp|loki-mcp)" pyproject.toml` returns only the SDK pin (`mcp==1.1.2`), not a server. The runtime imports under `triagepack.mcp/` are all first-party files in this repo.
+- **"Zero third-party MCP servers in the runtime sandbox"**: `grep -E '"(mcp|github-mcp|loki-mcp)' pyproject.toml` (note: deps are indented under `dependencies = [...]`, not column-anchored). Returns only the SDK pin (`mcp==1.1.2`), not a server. The runtime imports under `triagepack/mcp/` are all first-party files in this repo.
 - **"Egress-allowlisted"**: `cat docker/filter` shows the regex set; nothing else passes the tinyproxy sidecar.
 - **"Audited against April 2026 MCP RCE class"**: this file, the per-source rows above, dated and signed off as part of the release attestation.
 - **"SBOM ships with every release"**: `gh release view v0.1.0 --json assets` lists `sbom-0.1.0.cdx.json` and `sbom-0.1.0.spdx.json`.

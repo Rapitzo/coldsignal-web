@@ -4,7 +4,7 @@ triagepack v0.1 is listed on two third-party catalogues at ship: Smithery and MC
 
 ## Listing copy (one paragraph, ~70 words)
 
-> Audited Claude agent for incident triage. Takes a PagerDuty alert and posts to Slack: a proposed RCA, the suspected commit, the relevant log lines, a confidence score. Below the confidence floor it posts "needs human" with no fix shown. Ships with 30-scenario eval suite, SBOM, signed release attestation, and a Docker sandbox with a hardcoded egress allowlist. v0.1 ships zero third-party MCP servers in the runtime sandbox.
+> Audited Claude agent for incident triage. Takes a PagerDuty alert and posts to Slack: a proposed RCA, the suspected commit, the relevant log lines, a confidence score. Below the confidence floor it posts "needs human" with no fix shown. Ships with 30-scenario eval suite, SBOM, signed release attestation, and a Docker sandbox with a hardcoded egress allowlist. v0.1 ships zero third-party MCP servers in the runtime sandbox. Measured pass-rate publishes as v0.1.1 release asset by 2026-05-12.
 
 ## One-line description
 
@@ -17,7 +17,7 @@ triagepack is an audited Claude agent that triages on-call alerts. The pitch is 
 Three pillars, all present at v1:
 
 - **Security-audited.** v0.1 ships zero third-party MCP servers in the runtime sandbox. The three context sources are first-party REST clients we wrote, audit, and pin ourselves. The Docker recipe enforces a hardcoded egress allowlist (Anthropic, GitHub, Slack, PagerDuty, Notion, Datadog) via a tinyproxy sidecar; anything else 403s. SBOM (CycloneDX + SPDX) and SLSA v1 provenance attestation ship with every release.
-- **Verified to run.** 30-scenario eval suite based on anonymised PagerDuty incidents across infra/app/data/auth. Pass-rate is published per release; buyers can re-run on their own infra.
+- **Verified to run.** 30-scenario eval suite based on anonymised PagerDuty incidents across infra/app/data/auth. v0.1 ships unmeasured by design (key-provisioning constraint); measured pass-rate publishes as a v0.1.1 release asset (`baseline.json`) by 2026-05-12 — 1 week after ship. Buyers can re-run on their own infra at any time.
 - **Built-in observability.** OpenTelemetry built into the agent core. One line of config points spans at Grafana, Datadog, Phoenix, or Braintrust.
 
 ## Audit-claim language (legal-safe)
@@ -57,6 +57,14 @@ We cannot say (yet, per the honesty rail):
 ### Both — gating
 
 Submissions go in **after** Day 13 final eval run + Day 13 release tag is signed and promoted. We do not submit a draft listing pre-ship; the audit claim is the wedge and we want the listing to point at a verifiable release the moment a reader clicks.
+
+## Day-14 outreach (one-line callouts)
+
+Each of the 30 cold messages must include this line, prominent (not buried in a footer):
+
+> Pass-rate landing as v0.1.1 release asset by 2026-05-12 — 1 week after ship. Eval suite is in the repo; you can re-run before then on your own key.
+
+Rationale: shipping unmeasured plus a public commitment is more honest than hand-waving. The line is the single biggest credibility move we have to offset the missing number on the landing page.
 
 ## Screenshots needed (Day 12)
 

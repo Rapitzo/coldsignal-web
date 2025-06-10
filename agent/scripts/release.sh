@@ -81,7 +81,7 @@ trap 'rm -f "$NOTES_FILE"' EXIT
     if [ "$MEASURED" = "true" ]; then
       echo "**Eval baseline**: $PASSED/$TOTAL pass ($PCT%). Re-run via \`make evals\`."
     else
-      echo "**Eval baseline**: not yet measured for this release."
+      echo "**Eval baseline**: $TOTAL scenarios shipped, unmeasured at this release. Measured pass-rate publishes as a v0.1.1 release asset (\`baseline.json\`) by 2026-05-12. Buyers can run \`make evals\` against their own Anthropic key in the meantime."
     fi
   fi
   echo
