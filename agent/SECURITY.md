@@ -101,7 +101,7 @@ See `docker/Dockerfile` and `docker/docker-compose.yml`. Key invariants enforced
 
 - Original audit: CTO, 2026-04-22 (Day 6 — first-party MCP design + sandbox + SBOM).
 - Webhook-gate amendment: CTO, 2026-04-28 (Day 12 — closed `/v1/incidents` HMAC gate, added Known limitations).
-- CEO sign-off: CEO, 2026-04-28, conditional on Day-12 commits.
+- CEO sign-off: CEO, 2026-04-28 — verified against `1e5baf0` (rc1).
 - Re-audit trigger: any new dependency in `pyproject.toml`, any new outbound host in `mcp/`, any third-party MCP server added to the default sandbox, any change to the webhook signature gate.
 
 ## Verification recipes (for buyers who don't trust us)
@@ -114,13 +114,3 @@ Each public claim we make in the listing copy is verifiable from the release art
 - **"SBOM ships with every release"**: `gh release view v0.1.0 --json assets` lists `sbom-0.1.0.cdx.json` and `sbom-0.1.0.spdx.json`.
 - **"Signed release"**: `cosign verify-blob --bundle triagepack-0.1.0.cosign.bundle ...` succeeds with the org's keyless OIDC identity.
 
-## Day 11 review notes (for CEO)
-
-This file is the SECURITY.md draft submitted for the Day 11 EOD external-eyes review per the LIN-4 plan. Reviewer should focus on:
-
-1. The **per-source audit table** above — does the pass/fail reasoning hold for someone who doesn't already buy the wedge?
-2. The **headline claim** ("zero third-party MCP servers in the runtime sandbox") — is the supporting argument tight enough that an outside reader can verify it without reading the whole repo?
-3. The **egress allowlist** — are the listed hosts the minimum we actually need, or did we leave one in by inertia?
-4. The **gap between this doc and the listing copy** — anything the listing says that this audit doesn't actually support?
-
-Comments on individual rows preferred over a long top-level review.
