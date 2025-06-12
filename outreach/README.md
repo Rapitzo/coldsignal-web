@@ -104,3 +104,18 @@ Resend dashboard to confirm "delivered".
 3. Run the draft skill against that issue — it creates the approval card.
 4. Wait for approval. Sender agent fires after.
 5. Sent log lands as a comment on the same issue.
+
+## Inbound rail (replies)
+
+Replies to `hello@contact.coldsignal.dev` are routed via **Cloudflare Email Routing** to `rickardlind94@gmail.com`. The routing is one named address, not a wildcard catch-all - Cloudflare does not support catch-all on subdomains, only on the zone apex.
+
+If we add a new From-address (e.g. `noreply@contact.coldsignal.dev`), add a matching custom address in the Cloudflare dashboard under Email Routing ? Routes (with the `contact.coldsignal.dev` subdomain selected). Without that, replies to the new address will bounce.
+
+DNS state on `contact.coldsignal.dev` (verified 2026-04-28):
+
+- MX: `route1/2/3.mx.cloudflare.net` (Cloudflare receiving)
+- TXT (SPF): `v=spf1 include:_spf.mx.cloudflare.net ~all`
+- TXT (`resend._domainkey`): Resend DKIM, intact - DO NOT remove
+- Outbound (Resend) and inbound (Cloudflare) coexist. Resend uses its own bounce domain for SMTP MAIL FROM, so the Cloudflare-only SPF on this subdomain does not break outbound SPF/DMARC. DMARC alignment runs via DKIM. Do not "fix" the SPF to add Resend - not needed.
+
+History: see [LIN-21](/LIN/issues/LIN-21).
