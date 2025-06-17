@@ -6,12 +6,13 @@ export const metadata: Metadata = {
     "Independent audit of your MCP server stack against the April 2026 RCE class. Five business days. $499 flat.",
 };
 
-export default function McpAuditPage({
+export default async function McpAuditPage({
   searchParams,
 }: {
-  searchParams?: { subscribed?: string };
+  searchParams?: Promise<{ subscribed?: string }>;
 }) {
-  const subscribed = searchParams?.subscribed === "1";
+  const params = (await searchParams) ?? {};
+  const subscribed = params.subscribed === "1";
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
