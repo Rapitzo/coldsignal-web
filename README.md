@@ -1,8 +1,8 @@
 # triagepack — Incident Triage Agent
 
-Swarm Cycle 1 / Experiment E1 deliverable per [LIN-4](/LIN/issues/LIN-4). 14-day ship: 2026-04-27 → 2026-05-11. Plan: [/LIN/issues/LIN-4#document-plan](/LIN/issues/LIN-4#document-plan).
+An audited Claude agent that triages PagerDuty alerts. Original 14-day build (2026-04-27 → 2026-05-11) shipped as Experiment E1 of Lindforge Studio's first swarm cycle.
 
-> **Pivot note.** This repo previously housed an MCP pack-store thesis (the company has since rebranded to Coldsignal — see [LIN-17](/LIN/issues/LIN-17) and [LIN-19](/LIN/issues/LIN-19) for the rename history). That pack-store thesis was killed on 2026-04-27 by the CEO (saturated marketplace, AgentPacks already there). The repo was repurposed; the catalogue UI and `cold-email-triage` / `listing-generator` packs were removed. Other in-flight experiments (`app/mcp-audit/` for LIN-12, `app/e3-*` for LIN-13) live alongside this one.
+> **Repo history.** This codebase previously housed an MCP pack-store thesis that was killed on 2026-04-27 (saturated marketplace — AgentPacks already shipped). The repo was repurposed for triagepack; the old catalogue UI and `cold-email-triage` / `listing-generator` packs were removed. A handful of in-flight experiments under `app/mcp-audit/` and `app/e3-*` still live alongside this one.
 
 ## What ships
 
