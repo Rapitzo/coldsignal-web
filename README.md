@@ -60,8 +60,4 @@ uv sync
 uvicorn triagepack.webhook:app --reload --port 8081
 ```
 
-## Status
-
-**v0.1.0-rc1 tagged (2026-04-28).** Cycle 1 deliverables complete: webhook receiver with closed-by-default HMAC gate, reasoning loop with three first-party context sources, Slack Block Kit output (high-confidence and needs-human paths), 30-scenario eval suite, OpenTelemetry built in, egress-allowlisted Docker sandbox, SBOM/audit/release pipeline, signed-release CI workflow. Public ship blocked only on the operator-side `git push origin v0.1.0-rc1` against the canonical GitHub remote.
-
 See [`CHANGELOG.md`](CHANGELOG.md) for the full v0.1.0 entry.
