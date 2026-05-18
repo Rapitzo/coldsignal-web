@@ -4,7 +4,7 @@ All notable changes to triagepack are recorded here. The format follows [Keep a 
 
 ## [v0.1.0] — Swarm Cycle 1 ship
 
-First public release. Cycle 1 (2026-04-27 → 2026-05-11) per [LIN-4](/LIN/issues/LIN-4).
+First public release. Cycle 1 (2026-04-27 → 2026-05-11) per LIN-4.
 
 ### Added
 

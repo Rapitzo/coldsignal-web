@@ -1,6 +1,6 @@
 # Eval suite
 
-30 anonymised PagerDuty incident scenarios, target by Day 8 of the cycle. v0 ships with the harness and a placeholder scenario set; cases land progressively per the [LIN-4 plan](/LIN/issues/LIN-4#document-plan).
+30 anonymised PagerDuty incident scenarios, target by Day 8 of the cycle. v0 ships with the harness and a placeholder scenario set; cases land progressively per the LIN-4 plan.
 
 ## What's measured
 

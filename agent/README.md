@@ -32,7 +32,7 @@ agent/
 
 ## Status
 
-This is the **scaffold** committed at the start of cycle 1. Files marked `# TODO` are intentional placeholders that get filled in over the 14 days per the plan on [LIN-4](/LIN/issues/LIN-4#document-plan).
+This is the **scaffold** committed at the start of cycle 1. Files marked `# TODO` are intentional placeholders that get filled in over the 14 days per the plan on LIN-4.
 
 ## Local dev
 

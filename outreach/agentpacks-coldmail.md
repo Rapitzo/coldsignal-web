@@ -10,12 +10,12 @@ delivery shapes from the same core:
   exposes a `triage_incident(source, payload)` tool. Intended for MCP-server
   marketplaces (mcp-marketplace.io, MCPize) and Claude Desktop / Cline users.
 
-Pricing: match [LIN-4](/LIN/issues/LIN-4) Coldsignal list price (no channel
+Pricing: match LIN-4 Coldsignal list price (no channel
 discount, per CEO ruling on 2026-04-28).
 
 ## AgentPacks.ai — contact@agentpacks.ai
 
-**Status:** drafted, not sent. Board to send manually per [LIN-17](/LIN/issues/LIN-17),
+**Status:** drafted, not sent. Board to send manually per LIN-17,
 fallback EOD 2026-04-29 → drop AgentPacks if no human send.
 
 ```

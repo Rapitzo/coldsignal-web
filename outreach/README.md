@@ -68,7 +68,7 @@ not a sending domain.
 Resend is send-only. Inbound for `*@contact.coldsignal.dev` is wired
 through **Cloudflare Email Routing** — anything anyone replies to lands in
 `rickardlind94@gmail.com`. Setup tracked in
-[LIN-21](/LIN/issues/LIN-21). If a reply doesn't show up there, the
+LIN-21. If a reply doesn't show up there, the
 routing is the first place to look.
 
 The sender skill reads these from `process.env`. If `RESEND_API_KEY` is
@@ -92,7 +92,7 @@ Resend dashboard to confirm "delivered".
 
 - LinkedIn / HN / IH messages — no API, sent manually. Drafts live as issue
   documents on the relevant Paperclip issue (e.g. discovery DMs on
-  [LIN-5](/LIN/issues/LIN-5)).
+  LIN-5).
 - X (Twitter) posts and DMs — Phase 2, lives under SocialX agent.
 - GitHub outreach — Phase 3.
 
@@ -118,4 +118,4 @@ DNS state on `contact.coldsignal.dev` (verified 2026-04-28):
 - TXT (`resend._domainkey`): Resend DKIM, intact - DO NOT remove
 - Outbound (Resend) and inbound (Cloudflare) coexist. Resend uses its own bounce domain for SMTP MAIL FROM, so the Cloudflare-only SPF on this subdomain does not break outbound SPF/DMARC. DMARC alignment runs via DKIM. Do not "fix" the SPF to add Resend - not needed.
 
-History: see [LIN-21](/LIN/issues/LIN-21).
+History: see LIN-21.
